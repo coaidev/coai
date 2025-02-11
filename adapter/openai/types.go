@@ -26,16 +26,17 @@ type Message struct {
 
 // ChatRequest is the request body for openai
 type ChatRequest struct {
-	Model            string                 `json:"model"`
-	Messages         interface{}            `json:"messages"`
-	MaxToken         *int                   `json:"max_tokens,omitempty"`
-	Stream           bool                   `json:"stream"`
-	PresencePenalty  *float32               `json:"presence_penalty,omitempty"`
-	FrequencyPenalty *float32               `json:"frequency_penalty,omitempty"`
-	Temperature      *float32               `json:"temperature,omitempty"`
-	TopP             *float32               `json:"top_p,omitempty"`
-	Tools            *globals.FunctionTools `json:"tools,omitempty"`
-	ToolChoice       *interface{}           `json:"tool_choice,omitempty"` // string or object
+	Model               string                 `json:"model"`
+	Messages            interface{}            `json:"messages"`
+	MaxToken            *int                   `json:"max_tokens,omitempty"`
+	MaxCompletionTokens *int                   `json:"max_completion_tokens,omitempty"`
+	Stream              bool                   `json:"stream"`
+	PresencePenalty     *float32               `json:"presence_penalty,omitempty"`
+	FrequencyPenalty    *float32               `json:"frequency_penalty,omitempty"`
+	Temperature         *float32               `json:"temperature,omitempty"`
+	TopP                *float32               `json:"top_p,omitempty"`
+	Tools               *globals.FunctionTools `json:"tools,omitempty"`
+	ToolChoice          *interface{}           `json:"tool_choice,omitempty"` // string or object
 }
 
 // CompletionRequest is the request body for openai completion

@@ -13,6 +13,7 @@ type ChatInstance struct {
 	Endpoint         string
 	ApiKey           string
 	isFirstReasoning bool
+	isReasonOver     bool
 }
 
 func (c *ChatInstance) GetEndpoint() string {
@@ -90,7 +91,18 @@ func (c *ChatInstance) ProcessLine(data string) (string, error) {
 		}
 
 		delta := form.Choices[0].Delta
+
 		if delta.ReasoningContent != nil {
+			if *delta.ReasoningContent == "" && delta.Content != "" {
+				if !c.isReasonOver {
+					c.isReasonOver = true
+
+					return fmt.Sprintf("\n\n%s", delta.Content), nil
+				}
+			}
+		}
+
+		if delta.ReasoningContent != nil && delta.Content == "" {
 			content := *delta.ReasoningContent
 			// replace double newlines with single newlines for markdown
 			if strings.Contains(content, "\n\n") {
@@ -146,6 +158,7 @@ func (c *ChatInstance) CreateChatRequest(props *adaptercommon.ChatProps) (string
 
 func (c *ChatInstance) CreateStreamChatRequest(props *adaptercommon.ChatProps, callback globals.Hook) error {
 	c.isFirstReasoning = true
+	c.isReasonOver = false
 	err := utils.EventScanner(&utils.EventScannerProps{
 		Method:  "POST",
 		Uri:     c.GetChatEndpoint(),
