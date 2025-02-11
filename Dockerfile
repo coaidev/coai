@@ -12,7 +12,16 @@ COPY . .
 ENV GOOS=linux GO111MODULE=on CGO_ENABLED=1
 
 # Install dependencies for cgo
-RUN apk add --no-cache gcc musl-dev
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    g++ \
+    make \
+    linux-headers \
+    libc-dev \
+    pkgconfig \
+    build-base \
+    binutils-gold
 
 # Build backend
 RUN go install && \
