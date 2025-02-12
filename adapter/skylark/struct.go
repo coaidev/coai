@@ -3,52 +3,26 @@ package skylark
 import (
 	factory "chat/adapter/common"
 	"chat/globals"
-	"github.com/volcengine/volc-sdk-golang/service/maas"
-	"strings"
-)
-
-const (
-	defaultHost   = "maas-api.ml-platform-cn-beijing.volces.com"
-	defaultRegion = "cn-beijing"
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime"
 )
 
 type ChatInstance struct {
-	Instance *maas.MaaS
+	Instance *arkruntime.Client
 }
 
-func getHost(endpoint string) string {
-	seg := strings.Split(endpoint, "://")
-	if len(seg) > 1 && seg[1] != "" {
-		return seg[1]
-	}
-
-	return defaultHost
-}
-
-func getRegion(endpoint string) string {
-	host := getHost(endpoint)
-	seg := strings.TrimSuffix(strings.TrimPrefix(host, "maas-api.ml-platform-"), ".volces.com")
-	if seg != "" {
-		return seg
-	}
-
-	return defaultRegion
-}
-
-func NewChatInstance(endpoint, accessKey, secretKey string) *ChatInstance {
-	instance := maas.NewInstance(getHost(endpoint), getRegion(endpoint))
-	instance.SetAccessKey(accessKey)
-	instance.SetSecretKey(secretKey)
+func NewChatInstance(endpoint, apiKey string) *ChatInstance {
+	//https://ark.cn-beijing.volces.com/api/v3
+	instance := arkruntime.NewClientWithApiKey(apiKey, arkruntime.WithBaseUrl(endpoint))
 	return &ChatInstance{
 		Instance: instance,
 	}
 }
 
 func NewChatInstanceFromConfig(conf globals.ChannelConfig) factory.Factory {
-	params := conf.SplitRandomSecret(2)
+	params := conf.SplitRandomSecret(1)
 
 	return NewChatInstance(
 		conf.GetEndpoint(),
-		params[0], params[1],
+		params[0],
 	)
 }
