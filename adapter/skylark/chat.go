@@ -4,26 +4,28 @@ import (
 	adaptercommon "chat/adapter/common"
 	"chat/globals"
 	"chat/utils"
+	"context"
 	"fmt"
-
-	"github.com/volcengine/volc-sdk-golang/service/maas"
-	"github.com/volcengine/volc-sdk-golang/service/maas/models/api"
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
+	"github.com/volcengine/volcengine-go-sdk/volcengine"
+	"io"
 )
 
-const defaultMaxTokens int64 = 1500
+const defaultMaxTokens int = 4096
 
-func getMessages(messages []globals.Message) []*api.Message {
-	result := make([]*api.Message, 0)
+func getMessages(messages []globals.Message) []*model.ChatCompletionMessage {
+	result := make([]*model.ChatCompletionMessage, 0)
 
 	for _, message := range messages {
 		if message.Role == globals.Tool {
-			message.Role = maas.ChatRoleOfFunction
+			message.Role = model.ChatMessageRoleTool
 		}
 
-		msg := &api.Message{
-			Role:         message.Role,
-			Content:      message.Content,
-			FunctionCall: getFunctionCall(message.ToolCalls),
+		msg := &model.ChatCompletionMessage{
+			Role:             message.Role,
+			Content:          &model.ChatCompletionMessageContent{StringValue: volcengine.String(message.Content)},
+			FunctionCall:     getFunctionCall(message.ToolCalls),
+			ReasoningContent: message.ReasoningContent,
 		}
 
 		hasPrevious := len(result) > 0
@@ -31,7 +33,7 @@ func getMessages(messages []globals.Message) []*api.Message {
 		//  a message should not followed by the same role message, merge them
 		if hasPrevious && result[len(result)-1].Role == message.Role {
 			prev := result[len(result)-1]
-			prev.Content += msg.Content
+			prev.Content.StringValue = volcengine.String(*prev.Content.StringValue + *msg.Content.StringValue)
 			if message.ToolCalls != nil {
 				prev.FunctionCall = msg.FunctionCall
 			}
@@ -40,8 +42,8 @@ func getMessages(messages []globals.Message) []*api.Message {
 		}
 
 		// `assistant` message should follow a user or function message, if not has previous message, change the role to `user`
-		if !hasPrevious && message.Role == maas.ChatRoleOfAssistant {
-			msg.Role = maas.ChatRoleOfUser
+		if !hasPrevious && message.Role == model.ChatMessageRoleAssistant {
+			msg.Role = model.ChatMessageRoleUser
 		}
 
 		result = append(result, msg)
@@ -50,35 +52,31 @@ func getMessages(messages []globals.Message) []*api.Message {
 	return result
 }
 
-func (c *ChatInstance) GetMaxTokens(token *int) int64 {
+func (c *ChatInstance) GetMaxTokens(token *int) int {
 	if token == nil || *token < 0 {
 		return defaultMaxTokens
 	}
 
-	return int64(*token)
+	return *token
 }
 
-func (c *ChatInstance) CreateRequest(props *adaptercommon.ChatProps) *api.ChatReq {
-	return &api.ChatReq{
-		Model: &api.Model{
-			Name: props.Model,
-		},
-		Messages: getMessages(props.Message),
-		Parameters: &api.Parameters{
-			TopP:              utils.GetPtrVal(props.TopP, 0.),
-			TopK:              int64(utils.GetPtrVal(props.TopK, 0)),
-			Temperature:       utils.GetPtrVal(props.Temperature, 0.),
-			PresencePenalty:   utils.GetPtrVal(props.PresencePenalty, 0.),
-			FrequencyPenalty:  utils.GetPtrVal(props.FrequencyPenalty, 0.),
-			RepetitionPenalty: utils.GetPtrVal(props.RepetitionPenalty, 0.),
-			MaxTokens:         c.GetMaxTokens(props.MaxTokens),
-		},
-		Functions: getFunctions(props.Tools),
+func (c *ChatInstance) CreateRequest(props *adaptercommon.ChatProps) *model.ChatCompletionRequest {
+	return &model.ChatCompletionRequest{
+		Model:       props.OriginalModel,
+		Messages:    getMessages(props.Message),
+		Temperature: utils.GetPtrVal(props.Temperature, 0.),
+		TopP:        utils.GetPtrVal(props.TopP, 0.),
+		// TopK无了
+		PresencePenalty:   utils.GetPtrVal(props.PresencePenalty, 0.),
+		FrequencyPenalty:  utils.GetPtrVal(props.FrequencyPenalty, 0.),
+		RepetitionPenalty: utils.GetPtrVal(props.RepetitionPenalty, 0.),
+		MaxTokens:         c.GetMaxTokens(props.MaxTokens),
+		FunctionCall:      getFunctions(props.Tools),
 	}
 }
 
-func getToolCalls(choice *api.ChatResp) *globals.ToolCalls {
-	calls := choice.Choice.Message.FunctionCall
+func getToolCalls(id string, choiceDelta model.ChatCompletionStreamChoiceDelta) *globals.ToolCalls {
+	calls := choiceDelta.FunctionCall
 	if calls == nil {
 		return nil
 	}
@@ -86,7 +84,7 @@ func getToolCalls(choice *api.ChatResp) *globals.ToolCalls {
 	return &globals.ToolCalls{
 		globals.ToolCall{
 			Type: "function",
-			Id:   fmt.Sprintf("%s-%s", calls.Name, choice.ReqId),
+			Id:   fmt.Sprintf("%s-%s", calls.Name, id),
 			Function: globals.ToolCallFunction{
 				Name:      calls.Name,
 				Arguments: calls.Arguments,
@@ -95,34 +93,37 @@ func getToolCalls(choice *api.ChatResp) *globals.ToolCalls {
 	}
 }
 
-func getChoice(choice *api.ChatResp) *globals.Chunk {
-	if choice == nil || choice.Choice == nil || choice.Choice.Message == nil {
+func getChoice(choice model.ChatCompletionStreamResponse) *globals.Chunk {
+	if len(choice.Choices) == 0 {
 		return &globals.Chunk{Content: ""}
 	}
 
-	message := choice.Choice.Message
+	message := choice.Choices[0].Delta
 	return &globals.Chunk{
 		Content:  message.Content,
-		ToolCall: getToolCalls(choice),
+		ToolCall: getToolCalls(choice.ID, message),
 	}
 }
 
 func (c *ChatInstance) CreateStreamChatRequest(props *adaptercommon.ChatProps, callback globals.Hook) error {
 	req := c.CreateRequest(props)
-	channel, err := c.Instance.StreamChat(req)
+	stream, err := c.Instance.CreateChatCompletionStream(context.Background(), req)
 	if err != nil {
 		return err
 	}
+	defer stream.Close()
 
-	for partial := range channel {
-		if partial.Error != nil {
-			return partial.Error
+	for {
+		recv, err2 := stream.Recv()
+		if err2 == io.EOF {
+			return nil
 		}
-
-		if err := callback(getChoice(partial)); err != nil {
+		if err2 != nil {
+			return err2
+		}
+		if err = callback(getChoice(recv)); err != nil {
 			return err
 		}
 	}
-
 	return nil
 }

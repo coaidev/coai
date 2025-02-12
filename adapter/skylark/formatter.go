@@ -3,18 +3,19 @@ package skylark
 import (
 	"chat/globals"
 	"chat/utils"
+	"github.com/volcengine/volcengine-go-sdk/service/arkruntime/model"
 
 	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/volcengine/volc-sdk-golang/service/maas/models/api"
 )
 
-func getFunctionCall(calls *globals.ToolCalls) *api.FunctionCall {
+func getFunctionCall(calls *globals.ToolCalls) *model.FunctionCall {
 	if calls == nil || len(*calls) == 0 {
 		return nil
 	}
 
 	call := (*calls)[0]
-	return &api.FunctionCall{
+	return &model.FunctionCall{
 		Name:      call.Function.Name,
 		Arguments: call.Function.Arguments,
 	}
