@@ -62,7 +62,7 @@ func (c *ChatInstance) GetMaxTokens(token *int) int {
 
 func (c *ChatInstance) CreateRequest(props *adaptercommon.ChatProps) *model.ChatCompletionRequest {
 	return &model.ChatCompletionRequest{
-		Model:       props.OriginalModel,
+		Model:       props.Model,
 		Messages:    getMessages(props.Message),
 		Temperature: utils.GetPtrVal(props.Temperature, 0.),
 		TopP:        utils.GetPtrVal(props.TopP, 0.),
