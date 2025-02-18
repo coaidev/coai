@@ -68,21 +68,34 @@ function Markdown({
   className,
   loading,
 }: MarkdownProps) {
-  // memoize the component
+  const processedContent = useMemo(() => {
+    let content = children;
+    
+    // Inline math: replace \(...\) with $ ... $
+    content = content.replace(/\\\((.*?)\\\)/g, (_, equation) => `$ ${equation.trim()} $`);
+    
+    // Block math: replace \[...\] with $$...$$ on separate lines
+    content = content.replace(
+      /\s*\\\[\s*([\s\S]*?)\s*\\\]\s*/g,
+      (_, equation) => `\n$$\n${equation.trim()}\n$$\n`
+    );
+    
+    return content;
+  }, [children]);
+
   return useMemo(
     () => (
       <MarkdownContent
-        children={children}
+        children={processedContent}
         acceptHtml={acceptHtml}
         codeStyle={codeStyle}
         className={className}
         loading={loading}
       />
     ),
-    [children, acceptHtml, codeStyle, className, loading],
+    [processedContent, acceptHtml, codeStyle, className, loading],
   );
 }
-
 type CodeMarkdownProps = MarkdownProps & {
   filename: string;
 };
