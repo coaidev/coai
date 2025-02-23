@@ -331,6 +331,8 @@
   "export":{
     "text": "导出文本",
     "user_used": "用户自己导出",
+    "user_says": "用户说",
+    "ai_says": "AI说",
     "pdf": "导出成pdf"
   },
   "share": {

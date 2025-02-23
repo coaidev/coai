@@ -38,7 +38,6 @@ type ExportAllMsgButtonProps = {
 function ExportAllMsgButtonCall({
   formatter,
 }: ExportAllMsgButtonProps) {
-  const { t } = useTranslation();
   const [openPreview, setOpenPreview] = useState(!mobile);
   const [openInput, setOpenInput] = useState(true);
   const messages: Message[] = useMessages();
@@ -49,8 +48,9 @@ function ExportAllMsgButtonCall({
   const jsonString = `\`\`\`json\n${JSON.stringify(jsonArray, null, 4)}\n\`\`\``;
 
   function convertToMarkdown(jsonArray: { role: any; content: any; }[]) {
+    const { t } = useTranslation();
     return jsonArray.map(({ role, content }) => {
-      const roleText = role === 'user' ? '用户说' : 'AI说';
+      const roleText = role === 'user' ? t("export.user_says") : t("export.ai_says");
       return `## ${roleText}\n\n${content}`;
     }).join('\n\n');
   }
@@ -131,7 +131,7 @@ function ExportAllMsgButtonCall({
           )}
         </div>
       </div>
-      
+
     </div>
   );
 }
