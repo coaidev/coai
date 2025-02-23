@@ -108,6 +108,19 @@ export function SettingsAction() {
     </ChatAction>
   );
 }
+export function ExportButtonAction() {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+
+  return (
+    <ChatAction
+      text={t("export.markdown")}
+      onClick={() => dispatch(openDialog())}
+    >
+      <Settings className={`h-4 w-4`} />
+    </ChatAction>
+  );
+}
 
 export function MarketAction() {
   const { t } = useTranslation();
