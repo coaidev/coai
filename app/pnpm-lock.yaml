@@ -111,8 +111,8 @@ importers:
         specifier: ^1.10.0
         version: 1.10.0
       lucide-react:
-        specifier: ^0.309.0
-        version: 0.309.0(react@18.3.1)
+        specifier: ^0.320.0
+        version: 0.320.0(react@18.3.1)
       match-sorter:
         specifier: ^6.3.1
         version: 6.4.0
@@ -196,7 +196,7 @@ importers:
         specifier: ^20.5.9
         version: 20.17.17
       '@types/react':
-        specifier: ^18.2.15
+        specifier: ^18.3.18
         version: 18.3.18
       '@types/react-beautiful-dnd':
         specifier: ^13.1.8
@@ -2846,8 +2846,8 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lucide-react@0.309.0:
-    resolution: {integrity: sha512-zNVPczuwFrCfksZH3zbd1UDE6/WYhYAdbe2k7CImVyPAkXLgIwbs6eXQ4loigqDnUFjyFYCI5jZ1y10Kqal0dg==}
+  lucide-react@0.320.0:
+    resolution: {integrity: sha512-HuMmfmFiWwctDkN27wklKVZr8UpwP2TTekLZ3xiLCEjx/STG1k0KLWMbBfIJ/lnNJQDfSjztDZSVU316xA+AQg==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
 
@@ -6712,7 +6712,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lucide-react@0.309.0(react@18.3.1):
+  lucide-react@0.320.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 

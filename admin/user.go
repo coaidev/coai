@@ -118,10 +118,20 @@ func passwordMigration(db *sql.DB, cache *redis.Client, id int64, password strin
 	if len(password) < 6 || len(password) > 36 {
 		return fmt.Errorf("password length must be between 6 and 36")
 	}
+    var username string
+	hash_passwd := utils.Sha2Encrypt(password)
+    err_u := db.QueryRow("SELECT username FROM auth WHERE id = ?", id).Scan(&username)
+    if err_u != nil {
+        return fmt.Errorf("failed to fetch username: %v", err_u)
+    }
+    cacheKey := fmt.Sprintf("nio:user:%s", username)
+    if err_u := cache.Del(context.Background(), cacheKey).Err(); err_u != nil {
+        return fmt.Errorf("failed to delete cache: %v", err_u)
+    }
 
 	_, err := globals.ExecDb(db, `
 		UPDATE auth SET password = ? WHERE id = ?
-	`, utils.Sha2Encrypt(password), id)
+	`, hash_passwd, id)
 
 	cache.Del(context.Background(), fmt.Sprint("nio:user:root"))
 
