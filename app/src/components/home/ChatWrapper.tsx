@@ -35,6 +35,7 @@ import ScrollAction from "@/components/home/assemblies/ScrollAction.tsx";
 import { cn } from "@/components/ui/lib/utils.ts";
 import { goAuth } from "@/utils/app.ts";
 import { getModelFromId } from "@/conf/model.ts";
+import { JSONTransMarkdownProvider } from "@/components/ExportAllMsgButton.tsx";
 
 type InterfaceProps = {
   scrollable: boolean;
@@ -180,6 +181,7 @@ function ChatWrapper() {
             <MaskAction />
             <MarketAction />
             <SettingsAction />
+            <JSONTransMarkdownProvider />
           </div>
           <div className={`input-wrapper`}>
             <div className={`chat-box no-scrollbar`}>

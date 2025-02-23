@@ -328,6 +328,11 @@
     "update-success": "更新成功",
     "update-success-prompt": "您已更新至最新版本。"
   },
+  "export":{
+    "text": "导出文本",
+    "user_used": "用户自己导出",
+    "pdf": "导出成pdf"
+  },
   "share": {
     "title": "分享",
     "share-conversation": "分享对话",

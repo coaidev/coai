@@ -96,6 +96,52 @@ function Markdown({
     [processedContent, acceptHtml, codeStyle, className, loading],
   );
 }
+
+type MarkdownExportProps = {
+  children: string;
+  className?: string;
+  acceptHtml?: boolean;
+  codeStyle?: string;
+  loading?: boolean;
+};
+function MarkdownExport({
+  children,
+  acceptHtml,
+  codeStyle,
+  className,
+  loading,
+}: MarkdownExportProps) {
+  const processedContent = useMemo(() => {
+    let content = children;
+
+    // Inline math: replace \(...\) with $ ... $
+    content = content.replace(/\\\((.*?)\\\)/g, (_, equation) => `$ ${equation.trim()} $`);
+
+    // Block math: replace \[...\] with $$...$$ on separate lines
+    content = content.replace(
+      /\s*\\\[\s*([\s\S]*?)\s*\\\]\s*/g,
+      (_, equation) => `\n$$\n${equation.trim()}\n$$\n`
+    );
+
+    return content;
+  }, [children]);
+
+  return useMemo(
+    () => (
+      <MarkdownContent
+        children={processedContent}
+        acceptHtml={acceptHtml}
+        codeStyle={codeStyle}
+        className={className}
+        loading={loading}
+      />
+    ),
+    [processedContent, acceptHtml, codeStyle, className, loading],
+  );
+}
+export { MarkdownExport };
+
+
 type CodeMarkdownProps = MarkdownProps & {
   filename: string;
 };
