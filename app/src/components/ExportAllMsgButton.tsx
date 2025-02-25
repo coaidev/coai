@@ -47,13 +47,24 @@ function ExportAllMsgButtonCall({
   }));
   const jsonString = `\`\`\`json\n${JSON.stringify(jsonArray, null, 4)}\n\`\`\``;
 
+
   function convertToMarkdown(jsonArray: { role: any; content: any; }[]) {
     const { t } = useTranslation();
+    
+    // 定义一个函数来转义 ```` ``` ```` 字符串
+    const escapeBackticks = (text: string): string => {
+        return text.replace(/```/g, '\t```');
+    };
+    
     return jsonArray.map(({ role, content }) => {
-      const roleText = role === 'user' ? t("export.user_says") : t("export.ai_says");
-      return `## ${roleText}\n\n${content}`;
+        // 转义 content 中的 ```` ``` ```` 字符串
+        const escapedContent = escapeBackticks(content);
+        
+        const roleText = role === 'user' ? t("export.user_says") : t("export.ai_says");
+        return `## ${roleText}\n\n${escapedContent}`;
     }).join('\n\n');
-  }
+}
+
 
   const markdownString = convertToMarkdown(jsonArray);
   const markdownValue = useMemo(() => {
