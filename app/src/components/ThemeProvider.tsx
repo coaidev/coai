@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Monitor } from "lucide-react";
 
 import { Button } from "./ui/button";
 import { getMemory, setMemory } from "@/utils/memory.ts";
 import { themeEvent } from "@/events/theme.ts";
 
-const defaultTheme: Theme = "dark";
+const defaultTheme: Theme = "system";
 
 export type Theme = "dark" | "light" | "system";
 
@@ -15,7 +15,6 @@ type ThemeProviderProps = {
 
 type ThemeProviderState = {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
   toggleTheme?: () => void;
 };
 
@@ -23,13 +22,15 @@ export function activeTheme(theme: Theme) {
   const root = window.document.documentElement;
 
   root.classList.remove("light", "dark");
-  if (theme === "system")
+
+  if (theme === "system") {
     theme = window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
+  }
 
-  root.classList.add(theme);
-  setMemory("theme", theme);
+  root.classList.add(`${theme}`);
+
   themeEvent.emit(theme);
 }
 
@@ -38,52 +39,58 @@ export function getTheme() {
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
-  setTheme: (theme: Theme) => {
-    activeTheme(theme);
-  },
+  theme: defaultTheme,
   toggleTheme: () => {
-    const key = getMemory("theme");
-    const theme = (key.length > 0 ? key : defaultTheme) as Theme;
+    const currentTheme = getMemory("theme");
+    let newTheme: Theme;
+    const root = window.document.documentElement;
 
-    activeTheme(theme === "dark" ? "light" : "dark");
+
+    root.classList.remove("dark", "light","system");
+
+    // dark -> light -> system -> dark
+    if (currentTheme === "dark") {
+      newTheme = "light";
+      root.classList.add(`${newTheme}`);
+
+    } else if (currentTheme === "light") {
+      newTheme = "system";
+
+    } else {
+      newTheme = "dark";
+      root.classList.add(`${newTheme}`);
+
+    }
+
+
+    activeTheme(newTheme);
+    setMemory("theme", newTheme);
+
   },
 };
 
 const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
-  defaultTheme = "dark",
+  defaultTheme = "system",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (getMemory("theme") as Theme) || defaultTheme,
-  );
+  const { theme } = useTheme();
+
 
   useEffect(() => {
-    const root = window.document.documentElement;
 
-    root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
+    const savedTheme = getTheme();
+    
+    activeTheme(savedTheme);
   }, [theme]);
 
   const value = {
     theme,
     setTheme: (theme: Theme) => {
       setMemory("theme", theme);
-      setTheme(theme);
     },
+    toggleTheme: initialState.toggleTheme,
   };
 
   return <ThemeProviderContext.Provider {...props} value={value} />;
@@ -99,16 +106,61 @@ export const useTheme = () => {
 };
 
 export function ModeToggle() {
-  const { toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+
+  const icons = [
+    <Moon key="dark" className="h-[1.2rem] w-[1.2rem]" />,
+    <Sun key="light" className="h-[1.2rem] w-[1.2rem]" />,
+    <Monitor key="system" className="h-[1.2rem] w-[1.2rem]" />,
+  ];
+ 
+
+  useEffect(() => {
+    const savedTheme = getTheme();
+    const index = icons.findIndex(icon => icon.key === savedTheme);
+
+    setCurrentIconIndex(index);
+  }, [theme]);
+
+  const handleClick = () => {
+    if (isAnimating) return; // 防止重复点击
+    setIsAnimating(true);
+
+
+    toggleTheme?.();
+
+    setTimeout(() => {
+
+      const nextIconIndex = (currentIconIndex + 1) % icons.length;
+
+      setCurrentIconIndex(nextIconIndex);
+      setIsAnimating(false);
+    }, 500);
+  };
 
   return (
-    <Button variant="outline" size="icon" onClick={() => toggleTheme?.()}>
-      <Sun
-        className={`relative dark:absolute h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0`}
-      />
-      <Moon
-        className={`absolute dark:relative h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100`}
-      />
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleClick}
+      style={{
+        transition: "background-color 0.5s ease",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          transform: isAnimating ? "scale(0)" : "scale(1)",
+          transition: "transform 0.5s ease, opacity 0.5s ease",
+        }}
+      >
+        {icons[currentIconIndex]}
+      </div>
+
     </Button>
   );
 }
