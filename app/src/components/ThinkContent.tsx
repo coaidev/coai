@@ -41,7 +41,7 @@ export function ThinkContent({ content, isComplete = true }: ThinkContentProps) 
       
       <div
         className={cn(
-          "overflow-hidden transition-all duration-200",
+          "overflow-auto transition-all duration-200",
           isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
