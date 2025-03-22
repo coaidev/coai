@@ -80,6 +80,9 @@ export const modelColorMapper: Record<string, string> = {
 
   // OpenRouter
   openrouter: "purple-600",
+
+  // Novita AI
+  novita: "violet-500",
 };
 
 const unknownColors = [
