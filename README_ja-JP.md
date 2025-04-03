@@ -96,6 +96,9 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > 1. `Deploy` をクリックしてデプロイし、バインドしたいドメイン名を入力し、デプロイが完了するのを待ちます。
 > 2. デプロイが完了したら、ドメイン名にアクセスし、ユーザー名 `root` とパスワード `chatnio123456` を使用してバックエンド管理にログインします。チャットニオのバックエンドでパスワードを変更するように指示に従ってください。
 
+### ClawCloud Run (ワンクリック)
+[![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=WZVLKDWQ4CEA&openapp=system-fastdeploy%3FtemplateName%3Dchatnio)
+
 ### ⚡ Docker Composeインストール (推奨)
 > [!NOTE]
 > 実行が成功した後、ホストマシンのマッピングアドレスは `http://localhost:8000` です
