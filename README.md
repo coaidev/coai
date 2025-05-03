@@ -115,6 +115,19 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 5. Click the address in **Use Now** on the details interface to enter the CoAI interface. The default username is `root` and the password is `chatnio123456` to log in to the backend management.
 6. For more operation details and payment information, see：[Service Details](https://computenest.console.aliyun.com/service/detail/ap-southeast-1/service-27e11d3a5c9b40628505/1?type=user&isRecommend=true).
 
+### ClawCloud Run (One-Click)
+[![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=WZVLKDWQ4CEA&openapp=system-fastdeploy%3FtemplateName%3Dchatnio)
+
+> ClawCloud Run is a cloud-native deployment platform where users can deploy the application with one click, we provide FREE $5 credits ervey month.
+
+1. Click `Run on ClawCloud` to navigate ClawCloud Run platform, and then select "Deploy App" to initiate the deployment process.
+
+2. Wait for the deployment to complete. Click "Details" to navigate the application details page, and use the provided "Public Address" to access ChatNio. The default username is `root` and the password is `chatnio123456`.
+
+3. To modify application configurations, click "Update" on top-right.
+
+4. For more information about ClawCloud Run, see [ClawCloud Run Docs](https://docs.run.claw.cloud/).
+
 
 ### ⚡ Docker Compose Installation (Recommended)
 > [!NOTE]
