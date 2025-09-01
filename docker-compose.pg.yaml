@@ -1,0 +1,70 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_ROOT_PASSWORD: root
+      POSTGRES_DB: chatnio
+      POSTGRES_USER: chatnio
+      POSTGRES_PASSWORD: chatnio123456!
+      TZ: Asia/Shanghai
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    expose:
+      - "5432"
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    networks:
+      - chatnio-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    expose:
+      - "6379"
+    volumes:
+      - ./redis:/data
+    networks:
+      - chatnio-network
+
+  chatnio:
+    image: chatnio
+    build:
+      context: .
+    container_name: chatnio
+    restart: always
+    ports:
+      - "8000:8094"
+    depends_on:
+      - postgres
+      - redis
+    links:
+      - postgres
+      - redis
+    ulimits:
+      nofile:
+        soft: 65535
+        hard: 65535
+    environment:
+      DATABASE_DRIVER: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: chatnio
+      POSTGRES_PASSWORD: chatnio123456!
+      POSTGRES_DB: chatnio
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_DB: 0
+      SERVE_STATIC: "true"
+    volumes:
+      - ./config:/config
+      - ./logs:/logs
+      - ./storage:/storage
+    networks:
+      - chatnio-network
+
+networks:
+  chatnio-network:
+    driver: bridge

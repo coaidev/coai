@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/go-sql-driver/mysql"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/spf13/viper"
 )
@@ -23,7 +23,43 @@ func InitMySQLSafe() *sql.DB {
 	return DB
 }
 
-func getConn() *sql.DB {
+func getConnPostgres() *sql.DB {
+	sslMode := "disable"
+	if viper.GetBool("postgres.tls") {
+		sslMode = "require"
+	}
+
+	postgresUrl := fmt.Sprintf(
+		"host=%s port=%d user=%s password=%s dbname=%s sslmode=%s",
+		viper.GetString("postgres.host"),
+		viper.GetInt("postgres.port"),
+		viper.GetString("postgres.user"),
+		viper.GetString("postgres.password"),
+		utils.GetStringConfs("postgres.database", "postgres.db"),
+		sslMode,
+	)
+
+	db, err := sql.Open("postgres", postgresUrl)
+
+	if pingErr := db.Ping(); err != nil || pingErr != nil {
+		errMsg := utils.Multi(err != nil, utils.GetError(err), utils.GetError(pingErr))
+		globals.Warn(
+			fmt.Sprintf("[connection] failed to connect to postgres server: %s (message: %s), will retry in 5 seconds",
+				viper.GetString("postgres.host"), errMsg,
+			),
+		)
+
+		utils.Sleep(5000)
+		db.Close()
+
+		return getConnPostgres()
+	}
+
+	globals.Debug(fmt.Sprintf("[connection] connected to postgres server (host: %s)", viper.GetString("postgres.host")))
+	return db
+}
+
+func getConnMysql() *sql.DB {
 	if viper.GetString("mysql.host") == "" {
 		globals.SqliteEngine = true
 		globals.Warn("[connection] mysql host is not set, using sqlite (~/db/chatnio.db)")
@@ -66,7 +102,7 @@ func getConn() *sql.DB {
 		utils.Sleep(5000)
 		db.Close()
 
-		return getConn()
+		return getConnMysql()
 	}
 
 	globals.Debug(fmt.Sprintf("[connection] connected to mysql server (host: %s)", viper.GetString("mysql.host")))
@@ -74,7 +110,15 @@ func getConn() *sql.DB {
 }
 
 func ConnectDatabase() *sql.DB {
-	db := getConn()
+	var db *sql.DB
+
+	if viper.GetString("database.driver") == "postgres" {
+		globals.PostgresEngine = true
+		db = getConnPostgres()
+	} else {
+		// default to MySQL
+		db = getConnMysql()
+	}
 
 	db.SetMaxOpenConns(512)
 	db.SetMaxIdleConns(64)
@@ -91,6 +135,7 @@ func ConnectDatabase() *sql.DB {
 	CreateRedeemTable(db)
 	CreateBroadcastTable(db)
 
+	// nil when postgres
 	if err := doMigration(db); err != nil {
 		fmt.Println(fmt.Sprintf("migration error: %s", err))
 	}

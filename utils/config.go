@@ -13,6 +13,7 @@ import (
 
 var configFile = "config/config.yaml"
 var configExampleFile = "config.example.yaml"
+var configExampleFilePostgres = "config.example.pg.yaml"
 
 var redirectRoutes = []string{
 	"/v1",
@@ -23,9 +24,18 @@ var redirectRoutes = []string{
 func ReadConf() {
 	viper.SetConfigFile(configFile)
 
+	viper.AutomaticEnv()
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+
 	if !IsFileExist(configFile) {
-		fmt.Println(fmt.Sprintf("[service] config.yaml not found, creating one from template: %s", configExampleFile))
-		if err := CopyFile(configExampleFile, configFile); err != nil {
+		driver := viper.GetString("database.driver")
+		tmpExampleFile := configExampleFile
+		if driver == "postgres" {
+			tmpExampleFile = configExampleFilePostgres
+		}
+
+		fmt.Printf("[service] config.yaml not found, creating one from template: %s\n", tmpExampleFile)
+		if err := CopyFile(tmpExampleFile, configFile); err != nil {
 			fmt.Println(err)
 		}
 	}
@@ -33,9 +43,6 @@ func ReadConf() {
 	if err := viper.ReadInConfig(); err != nil {
 		panic(err)
 	}
-
-	viper.AutomaticEnv()
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 
 	if timeout := viper.GetInt("max_timeout"); timeout > 0 {
 		globals.HttpMaxTimeout = time.Second * time.Duration(timeout)

@@ -34,6 +34,9 @@ func execSql(db *sql.DB, sql string, args ...interface{}) error {
 func doMigration(db *sql.DB) error {
 	if globals.SqliteEngine {
 		return doSqliteMigration(db)
+	} else if globals.PostgresEngine {
+		// no migration for postgres yet
+		return nil
 	}
 
 	// v3.10 migration
