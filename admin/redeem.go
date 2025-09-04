@@ -36,8 +36,8 @@ func GetRedeemData(db *sql.DB, page int64) PaginationForm {
 
 	for rows.Next() {
 		var redeem RedeemData
-		var createdAt []uint8
-		var updatedAt []uint8
+		var createdAt sql.NullTime
+		var updatedAt sql.NullTime
 		if err := rows.Scan(&redeem.Code, &redeem.Quota, &redeem.Used, &createdAt, &updatedAt); err != nil {
 			return PaginationForm{
 				Status:  false,
@@ -45,8 +45,18 @@ func GetRedeemData(db *sql.DB, page int64) PaginationForm {
 			}
 		}
 
-		redeem.CreatedAt = utils.ConvertTime(createdAt).Format("2006-01-02 15:04:05")
-		redeem.UpdatedAt = utils.ConvertTime(updatedAt).Format("2006-01-02 15:04:05")
+		if createdAt.Valid {
+			redeem.CreatedAt = createdAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			redeem.CreatedAt = ""
+		}
+
+		if updatedAt.Valid {
+			redeem.UpdatedAt = updatedAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			redeem.UpdatedAt = ""
+		}
+
 		data = append(data, redeem)
 	}
 

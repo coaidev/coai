@@ -7,9 +7,10 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/go-redis/redis/v8"
 	"math"
 	"time"
+
+	"github.com/go-redis/redis/v8"
 )
 
 func disableSubscription() bool {
@@ -21,13 +22,15 @@ func (u *User) GetSubscription(db *sql.DB) (time.Time, int) {
 		return *u.Subscription, u.Level
 	}
 
-	var expiredAt []uint8
+	var expiredAt sql.NullTime
 	if err := globals.QueryRowDb(db, "SELECT expired_at, level FROM subscription WHERE user_id = ?", u.GetID(db)).Scan(&expiredAt, &u.Level); err != nil {
 		return time.Unix(0, 0), 0
 	}
 
-	t := utils.ConvertTime(expiredAt)
-	if t == nil {
+	var t *time.Time
+	if expiredAt.Valid {
+		t = utils.ToPtr(expiredAt.Time)
+	} else {
 		t = utils.ToPtr(time.Unix(0, 0))
 	}
 

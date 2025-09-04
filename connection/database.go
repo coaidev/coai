@@ -79,13 +79,17 @@ func getConnMysql() *sql.DB {
 		viper.GetInt("mysql.port"),
 		utils.GetStringConfs("mysql.database", "mysql.db"),
 	)
+
+	// enable parseTime to convert []uint8 to sql.NullTime
+	mysqlUrl += "?parseTime=true"
+
 	if viper.GetBool("mysql.tls") {
 		mysql.RegisterTLSConfig("tls", &tls.Config{
 			MinVersion: tls.VersionTLS12,
 			ServerName: viper.GetString("mysql.host"),
 		})
 
-		mysqlUrl += "?tls=tls"
+		mysqlUrl += "&tls=tls"
 	}
 
 	// connect to MySQL
