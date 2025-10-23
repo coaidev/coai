@@ -103,13 +103,18 @@ func ListSharedConversation(db *sql.DB, user *auth.User) []SharedPreviewForm {
 
 	result := make([]SharedPreviewForm, 0)
 	for rows.Next() {
-		var updated []uint8
+		var updated sql.NullTime
 		var form SharedPreviewForm
 		if err := rows.Scan(&form.Name, &form.ConversationId, &updated, &form.Hash); err != nil {
 			continue
 		}
 
-		form.Time = *utils.ConvertTime(updated)
+		if updated.Valid {
+			form.Time = updated.Time
+		} else {
+			form.Time = time.Unix(0, 0)
+		}
+
 		result = append(result, form)
 	}
 	return result
@@ -135,7 +140,7 @@ func GetSharedConversation(db *sql.DB, hash string) (*SharedForm, error) {
 		uid     int64
 		cid     int64
 		ref     string
-		updated []uint8
+		updated sql.NullTime
 	)
 	if err := globals.QueryRowDb(db, `
 		SELECT auth.username, sharing.refs, sharing.updated_at, conversation.conversation_name,
@@ -148,7 +153,12 @@ func GetSharedConversation(db *sql.DB, hash string) (*SharedForm, error) {
 		return nil, err
 	}
 
-	shared.Time = *utils.ConvertTime(updated)
+	if updated.Valid {
+		shared.Time = updated.Time
+	} else {
+		shared.Time = time.Unix(0, 0)
+	}
+
 	refs := strings.Split(ref, ",")
 	shared.Messages = GetSharedMessages(db, uid, cid, refs)
 

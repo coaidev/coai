@@ -1,0 +1,31 @@
+postgres:
+  db: chatnio
+  host: localhost
+  password: chatnio123456
+  port: 5432
+  user: root
+  tls: false
+
+redis:
+  host: localhost
+  port: 6379
+  db: 0
+  password: ""
+
+secret: secret
+serve_static: true
+
+server:
+  port: 8094
+system:
+  general:
+    backend: ""
+  mail:
+    host: ""
+    port: 465
+    username: ""
+    password: ""
+    from: ""
+  search:
+    endpoint: https://duckduckgo-api.vercel.app
+    query: 5

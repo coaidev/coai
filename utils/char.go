@@ -35,6 +35,7 @@ func GenerateChar(length int) string {
 	return string(result)
 }
 
+// deprecated: use sql.NullTime directly
 func ConvertTime(t []uint8) *time.Time {
 	val, err := time.Parse("2006-01-02 15:04:05", string(t))
 	if err != nil {
