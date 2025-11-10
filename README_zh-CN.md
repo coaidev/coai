@@ -114,6 +114,9 @@
 5. 点击详情界面**立即使用**中的链接，可进入CoAI社区版界面。默认用户名为`root`，密码`为chatnio123456` 登录后台管理。
 6. 更多操作详情与付费信息，参见：[服务详情](https://computenest.console.aliyun.com/service/detail/cn-hangzhou/service-bfbf676bd89d434691fc/1?type=user&isRecommend=true)
 
+### ClawCloud Run (一键部署)
+[![Run on ClawCloud](https://raw.githubusercontent.com/ClawCloud/Run-Template/refs/heads/main/Run-on-ClawCloud.svg)](https://template.run.claw.cloud/?referralCode=WZVLKDWQ4CEA&openapp=system-fastdeploy%3FtemplateName%3Dchatnio)
+
 ### ⚡ Docker Compose 安装 (推荐)
 > [!NOTE]
 > 运行成功后, 宿主机映射地址为 `http://localhost:8000`
