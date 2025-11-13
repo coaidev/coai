@@ -66,7 +66,7 @@ func getUsersForm(db *sql.DB, page int64, search string) PaginationForm {
 		var user UserData
 		var (
 			email             sql.NullString
-			expired           []uint8
+			expired           sql.NullTime
 			quota             sql.NullFloat64
 			usedQuota         sql.NullFloat64
 			totalMonth        sql.NullInt64
@@ -95,10 +95,9 @@ func getUsersForm(db *sql.DB, page int64, search string) PaginationForm {
 		if subscriptionLevel.Valid {
 			user.Level = int(subscriptionLevel.Int64)
 		}
-		stamp := utils.ConvertTime(expired)
-		if stamp != nil {
-			user.IsSubscribed = stamp.After(time.Now())
-			user.ExpiredAt = stamp.Format("2006-01-02 15:04:05")
+		if expired.Valid {
+			user.IsSubscribed = expired.Time.After(time.Now())
+			user.ExpiredAt = expired.Time.Format("2006-01-02 15:04:05")
 		}
 		user.Enterprise = isEnterprise.Valid && isEnterprise.Bool
 		user.IsBanned = isBanned.Valid && isBanned.Bool

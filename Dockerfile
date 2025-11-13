@@ -52,6 +52,7 @@ WORKDIR /
 # Copy dist
 COPY --from=backend /backend/chat /chat
 COPY --from=backend /backend/config.example.yaml /config.example.yaml
+COPY --from=backend /backend/config.example.pg.yaml /config.example.pg.yaml
 COPY --from=backend /backend/utils/templates /utils/templates
 COPY --from=backend /backend/addition/article/template.docx /addition/article/template.docx
 COPY --from=frontend /app/dist /app/dist

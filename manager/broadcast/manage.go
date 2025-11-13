@@ -5,6 +5,8 @@ import (
 	"chat/globals"
 	"chat/utils"
 	"context"
+	"database/sql"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,11 +39,17 @@ func getBroadcastList(c *gin.Context) ([]Info, error) {
 
 	for rows.Next() {
 		var broadcast Info
-		var createdAt []uint8
+		var createdAt sql.NullTime
 		if err := rows.Scan(&broadcast.Index, &broadcast.Content, &broadcast.Poster, &createdAt); err != nil {
 			return nil, err
 		}
-		broadcast.CreatedAt = utils.ConvertTime(createdAt).Format("2006-01-02 15:04:05")
+
+		if createdAt.Valid {
+			broadcast.CreatedAt = createdAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			broadcast.CreatedAt = ""
+		}
+
 		broadcastList = append(broadcastList, broadcast)
 	}
 

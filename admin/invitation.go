@@ -40,16 +40,27 @@ func GetInvitationPagination(db *sql.DB, page int64) PaginationForm {
 
 	for rows.Next() {
 		var invitation InvitationData
-		var createdAt []uint8
-		var updatedAt []uint8
+		var createdAt sql.NullTime
+		var updatedAt sql.NullTime
 		if err := rows.Scan(&invitation.Code, &invitation.Quota, &invitation.Type, &invitation.Used, &createdAt, &updatedAt, &invitation.Username); err != nil {
 			return PaginationForm{
 				Status:  false,
 				Message: err.Error(),
 			}
 		}
-		invitation.CreatedAt = utils.ConvertTime(createdAt).Format("2006-01-02 15:04:05")
-		invitation.UpdatedAt = utils.ConvertTime(updatedAt).Format("2006-01-02 15:04:05")
+
+		if createdAt.Valid {
+			invitation.CreatedAt = createdAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			invitation.CreatedAt = ""
+		}
+
+		if updatedAt.Valid {
+			invitation.UpdatedAt = updatedAt.Time.Format("2006-01-02 15:04:05")
+		} else {
+			invitation.UpdatedAt = ""
+		}
+
 		invitations = append(invitations, invitation)
 	}
 
