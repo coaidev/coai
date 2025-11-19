@@ -36,12 +36,21 @@ go build -o chatnio       # Build binary
 MYSQL_HOST=localhost REDIS_HOST=localhost ./chatnio
 
 # Docker development
-docker-compose up -d      # Start all services (app + MySQL + Redis)
-docker-compose down       # Stop all services
-docker-compose pull       # Update images
+docker-compose up -d                            # Start all services (app + MySQL + Redis)
+docker-compose -f docker-compose.stable.yaml up -d  # Use stable version instead of latest
+docker-compose -f docker-compose.watch.yaml up -d   # Enable Watchtower for auto-updates
+docker-compose down                              # Stop all services
+docker-compose pull                              # Update images
 ```
 
 **Note:** The backend requires MySQL and Redis to be running. Configuration is read from `config/config.yaml` or environment variables (e.g., `MYSQL_HOST` overrides `mysql.host`).
+
+**Startup Sequence (main.go):**
+1. `utils.ReadConf()` - Load configuration
+2. `admin.InitInstance()` - Initialize admin instance and run database migrations
+3. `channel.InitManager()` - Initialize channel management system
+4. Register middleware and routes
+5. Start Gin HTTP server on configured port
 
 ## Architecture
 
@@ -135,13 +144,17 @@ Environment variables override config file values. Example: `MYSQL_HOST` overrid
 
 ## API Routes
 
-Routes are registered in `main.go` under `/api` prefix (when `serve_static=true`):
-- `/api/auth/*` - Authentication endpoints (auth package)
-- `/api/admin/*` - Admin panel APIs (admin package)
-- `/api/v1/*` - OpenAI-compatible API (adapter package)
-- `/api/chat/*` - Chat management (manager package)
-- `/api/conversation/*` - Conversation sync (conversation package)
-- `/api/addition/*` - Additional features (addition package)
+Routes are registered in `main.go`:
+- **When `serve_static=true`** (default): Routes are under `/api` prefix (frontend served at `/`)
+- **When `serve_static=false`**: Routes are at root level (for separate frontend deployment)
+
+Available endpoints:
+- `/api/auth/*` (or `/auth/*`) - Authentication endpoints (auth package)
+- `/api/admin/*` (or `/admin/*`) - Admin panel APIs (admin package)
+- `/api/v1/*` (or `/v1/*`) - OpenAI-compatible API (adapter package)
+- `/api/chat/*` (or `/chat/*`) - Chat management (manager package)
+- `/api/conversation/*` (or `/conversation/*`) - Conversation sync (conversation package)
+- `/api/addition/*` (or `/addition/*`) - Additional features (addition package)
 
 ## Database Migrations
 
