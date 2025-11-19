@@ -57,6 +57,8 @@ The backend follows a modular, layered architecture:
 - `auth/` - Authentication & authorization
 - `admin/` - Admin panel APIs
 - `middleware/` - HTTP middleware (CORS, auth, rate limiting)
+- `connection/` - Database connection management (MySQL/SQLite)
+- `utils/` - Utilities including WebSocket handling, logging, etc.
 
 **Key Architectural Patterns:**
 
@@ -82,9 +84,15 @@ The backend follows a modular, layered architecture:
    - `conversation/` - Conversation sync and sharing
    - `relay.go` - Request relaying to appropriate adapters
 
-4. **Connection Layer (connection/):** WebSocket support for real-time streaming
-   - `manager.go` - WebSocket connection pool
-   - `broadcast/` - Broadcasting system for real-time updates
+4. **WebSocket & Real-time Communication:**
+   - `manager/connection.go` - WebSocket connection management for chat sessions
+   - `manager/broadcast/` - Broadcasting system for real-time updates across sessions
+   - `utils/websocket.go` - Low-level WebSocket utilities and connection monitoring
+
+5. **Database Layer (connection/):** Database connection management
+   - Supports both MySQL (production) and SQLite (fallback for development)
+   - Auto-switches to SQLite if MySQL host is not configured
+   - Connection pooling and automatic reconnection handled by `worker.go`
 
 ### Frontend Structure
 
