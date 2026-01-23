@@ -2,20 +2,18 @@
 
 ![chatnio](/app/public/logo.png)
 
-# [🥳 Chat Nio](https://chatnio.com)
+# [🥳 CoAI.Dev](https://coai.dev)
 
 #### 🚀 Next Generation AIGC One-Stop Business Solution
 
-#### *"Chat Nio > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api)"*
+#### *"CoAI.Dev > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api)"*
 
 
-English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) · [Docs](https://chatnio.com) · [Discord](https://discord.gg/rpzNSmqaF2) · [Deployment Guide](https://chatnio.com/docs/deploy)
+English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) · [Docs](https://coai.dev) · [Discord](https://discord.gg/rpzNSmqaF2) · [Deployment Guide](https://coai.dev/docs/deploy)
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/M86XJI)
+[![CoAI.Dev: #1 Repo Of The Day](https://trendshift.io/api/badge/repositories/6369)](https://trendshift.io/repositories/6369)
 
-[![Chat Nio: #1 Repo Of The Day](https://trendshift.io/api/badge/repositories/6369)](https://trendshift.io/repositories/6369)
-
-<img alt="Chat Nio Preview" src="./screenshot/chatnio.png" width="100%" style="border-radius: 8px">
+<img alt="CoAI.Dev Preview" src="./screenshot/coai.png" width="100%" style="border-radius: 8px">
 
 </div>
 
@@ -23,12 +21,12 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 1. 🤖️ **Rich Model Support**: Multi-model service provider support (OpenAI / Anthropic / Gemini / Midjourney and more than ten compatible formats & private LLM support)
 2. 🤯 **Beautiful UI Design**: UI compatible with PC / Pad / Mobile, following [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) design standards, rich and beautiful interface design and backend dashboard
 3. 🎃 **Complete Markdown Support**: Support for **LaTeX formulas** / **Mermaid mind maps** / table rendering / code highlighting / chart drawing / progress bars and other advanced Markdown syntax support
-4. 👀 **Multi-theme Support**: Support for multiple theme switching, including **Light Mode** for light themes and **Dark Mode** for dark themes. 👉 [Custom Color Scheme](https://github.com/Deeptrain-Community/chatnio/blob/main/app/src/assets/globals.less)
-5. 📚 **Internationalization Support**: Support for internationalization, multi-language switching 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 Welcome to contribute translations [Pull Request](https://github.com/Deeptrain-Community/chatnio/pulls)
+4. 👀 **Multi-theme Support**: Support for multiple theme switching, including **Light Mode** for light themes and **Dark Mode** for dark themes. 👉 [Custom Color Scheme](https://github.com/coaidev/coai/blob/main/app/src/assets/globals.less)
+5. 📚 **Internationalization Support**: Support for internationalization, multi-language switching 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 Welcome to contribute translations [Pull Request](https://github.com/coaidev/coai/pulls)
 6. 🎨 **Text-to-Image Support**: Support for multiple text-to-image models: **OpenAI DALL-E**✅ & **Midjourney** (support for **U/V/R** operations)✅ & Stable Diffusion✅ etc.
 7. 📡 **Powerful Conversation Sync**: **Zero-cost cross-device conversation sync support for users**, support for **conversation sharing** (link sharing & save as image & share management), **no need for WebDav / WebRTC and other dependencies and complex learning costs**
 8. 🎈 **Model Market & Preset System**: Support for customizable model market in the backend, providing model introductions, tags, and other parameters. Site owners can customize model introductions according to the situation. Also supports a preset system, including **custom presets** and **cloud synchronization** functions.
-9. 📖 **Rich File Parsing**: **Out-of-the-box**, supports file parsing for **all models** (PDF / Docx / Pptx / Excel / image formats parsing), **supports more cloud image storage solutions** (S3 / R2 / MinIO etc.), **supports OCR image recognition** 👉 See project [Chat Nio Blob Service](https://github.com/Deeptrain-Community/chatnio-blob-service) for details (supports Vercel / Docker one-click deployment)
+9. 📖 **Rich File Parsing**: **Out-of-the-box**, supports file parsing for **all models** (PDF / Docx / Pptx / Excel / image formats parsing), **supports more cloud image storage solutions** (S3 / R2 / MinIO etc.), **supports OCR image recognition** 👉 See project [CoAI.Dev Blob Service](https://github.com/coaidev/blob-service) for details (supports Vercel / Docker one-click deployment)
 10. 🌏 **Full Model Internet Search**: Based on the [SearXNG](https://github.com/searxng/searxng) open-source engine, supports rich search engines such as Google / Bing / DuckDuckGo / Yahoo / Wikipedia / Arxiv / Qwant, supports safe search mode, content truncation, image proxy, test search availability, and other functions.
 11. 💕 **Progressive Web App (PWA)**: Supports PWA applications & desktop support (desktop based on [Tauri](https://github.com/tauri-apps/tauri))
 12. 🤩 **Comprehensive Backend Management**: Supports beautiful and rich dashboard, announcement & notification management, user management, subscription management, gift code & redemption code management, price setting, subscription setting, custom model market, custom site name & logo, SMTP email settings, and other functions
@@ -42,9 +40,9 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 20. 🎫 **Multiple Redemption Code Systems**: Supports multiple redemption code systems, supports gift codes and redemption codes, supports batch generation, gift codes are suitable for promotional distribution, redemption codes are suitable for card sales, for gift codes of one type, a user can only redeem one code, which to some extent reduces the situation of one user redeeming multiple times in promotions😀
 21. 🥰 **Business-Friendly License**: Adopts the **Apache-2.0** open-source license, friendly for commercial secondary development & distribution (please also comply with the provisions of the Apache-2.0 license, do not use for illegal purposes)
 
-> ### ✨ Chat Nio Business
+> ### ✨ CoAI.Dev Business
 >
-> ![Pro Version Preview](./screenshot/chatnio-pro.png)
+> ![Pro Version Preview](./screenshot/coai-pro.png)
 >
 > - ✅ Beautiful commercial-grade UI, elegant frontend interface and backend management
 > - ✅ Supports TTS & STT, plugin marketplace, RAG knowledge base and other rich features and modules
@@ -57,7 +55,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > - ✅ Supports Discord/Telegram/Feishu and other bot integration capabilities (extension modules)
 > - ...
 >
-> [👉 Learn More](https://www.chatnio.com/docs/contact)
+> [👉 Learn More](https://www.coai.dev/docs/contact)
 
 
 ## 🔨 Supported Models
@@ -121,7 +119,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > After successful execution, the host machine mapping address is `http://localhost:8000`
 
 ```shell
-git clone --depth=1 --branch=main --single-branch https://github.com/Deeptrain-Community/chatnio.git
+git clone --depth=1 --branch=main --single-branch https://github.com/coaidev/coai.git
 cd chatnio
 docker-compose up -d # Run the service
 # To use the stable version, use docker-compose -f docker-compose.stable.yaml up -d instead
@@ -185,7 +183,7 @@ docker pull programzmh/chatnio:latest
 > Config settings (~/config/**config.yaml**) can be overridden using environment variables. For example, the `MYSQL_HOST` environment variable can override the `mysql.host` configuration item
 
 ```shell
-git clone https://github.com/Deeptrain-Community/chatnio.git
+git clone https://github.com/coaidev/coai.git
 cd chatnio
 
 cd app
@@ -226,7 +224,7 @@ Although these projects support powerful API proxying and management, they lack 
 Therefore, we hope to combine the advantages of these two types of projects to create a project that has both a powerful API distribution system and a rich user interface design,
 thus meeting the needs of C-end users while developing B-end business, improving user experience, reducing user learning costs, and increasing user stickiness.
 
-Thus, **Chat Nio** was born. We hope to create a project that has both a powerful API distribution system and a rich user interface design, becoming the next-generation open-source AIGC project's one-stop commercial solution.
+Thus, **CoAI.Dev** was born. We hope to create a project that has both a powerful API distribution system and a rich user interface design, becoming the next-generation open-source AIGC project's one-stop commercial solution.
 
 
 ## ❤ Donations

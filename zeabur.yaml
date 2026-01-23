@@ -4,37 +4,37 @@ metadata:
   name: ChatNio
 spec:
   description: 🥳 Next Generation AI One-Stop Solution
-  icon: https://chatnio.com/logo.png
-  coverImage: https://github.com/Deeptrain-Community/chatnio/raw/main/screenshot/chatnio.png
+  icon: https://coai.dev/logo.png
+  coverImage: https://github.com/coaidev/coai/raw/main/screenshot/coai.png
   variables:
     - key: PUBLIC_DOMAIN
       type: DOMAIN
       name: Domain
-      description: What is the domain you want for your Chat Nio?
+      description: What is the domain you want for your CoAI.Dev?
   tags:
     - ChatGPT
     - API
     - Website
   readme: |-
-    # [🥳 Chat Nio](https://chatnio.com)
+    # [🥳 CoAI.Dev](https://coai.dev)
 
     #### 🚀 下一代 AIGC 一站式商业解决方案
-    #### *“ Chat Nio > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api) ”*
+    #### *“ CoAI.Dev > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api) ”*
 
 
-    [English](./README.md) · 简体中文 · [官网](https://chatnio.com) · [Discord](https://discord.gg/rpzNSmqaF2) · [部署文档](https://chatnio.com/docs/deploy)
+    [English](./README.md) · 简体中文 · [官网](https://coai.dev) · [Discord](https://discord.gg/rpzNSmqaF2) · [部署文档](https://coai.dev/docs/deploy)
 
 
     ## 📝 功能
     1. 🤖️ **丰富模型支持**: 多模型服务商支持 (OpenAI / Anthropic / Gemini / Midjourney 等十余种格式兼容 & 私有化 LLM 支持)
     2. 🤯 **美观 UI 设计**: UI 兼容 PC / Pad / 移动三端，遵循 [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) 设计规范，丰富美观的界面设计和后台仪表盘
     3. 🎃 **完整 Markdown 支持**: 支持 **LaTeX 公式** / **Mermaid 思维导图** / 表格渲染 / 代码高亮 / 图表绘制 / 进度条等进阶 Markdown 语法支持
-    4. 👀 **多主题支持**: 支持多种主题切换，包含亮色主题的**明亮模式**和暗色主题的**深色模式**。 👉 [自定义配色](https://github.com/Deeptrain-Community/chatnio/blob/main/app/src/assets/globals.less)
-    5. 📚 **国际化支持**: 支持国际化，支持多语言切换 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 欢迎贡献翻译 [Pull Request](https://github.com/Deeptrain-Community/chatnio/pulls) 
+    4. 👀 **多主题支持**: 支持多种主题切换，包含亮色主题的**明亮模式**和暗色主题的**深色模式**。 👉 [自定义配色](https://github.com/coaidev/coai/blob/main/app/src/assets/globals.less)
+    5. 📚 **国际化支持**: 支持国际化，支持多语言切换 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 欢迎贡献翻译 [Pull Request](https://github.com/coaidev/coai/pulls) 
     6. 🎨 **文生图支持**: 支持多种文生图模型: **OpenAI DALL-E**✅ & **Midjourney** (支持 **U/V/R** 操作)✅ & Stable Diffusion✅ 等
     7. 📡 **强大对话同步**: **用户 0 成本对话跨端同步支持**，支持**对话分享** (支持链接分享 & 保存为图片 & 分享管理), **无需 WebDav / WebRTC 等依赖和复杂学习成本**
     8. 🎈 **模型市场 & 预设系统**: 支持后台可自定义的模型市场, 可提供模型介绍、标签等参数, 站长可根据情况自定义模型简介。同时支持预设系统，包含 **自定义预设** 和 **云端同步** 功能。
-    9. 📖 **丰富文件解析**: **开箱即用**, 支持**所有模型**的文件解析 (PDF / Docx / Pptx / Excel / 图片等格式解析), **支持更多云端图片存储方案** (S3 / R2 / MinIO 等), **支持 OCR 图片识别** 👉 详情参见项目 [Chat Nio Blob Service](https://github.com/Deeptrain-Community/chatnio-blob-service) (支持 Vercel / Docker 一键部署)
+    9. 📖 **丰富文件解析**: **开箱即用**, 支持**所有模型**的文件解析 (PDF / Docx / Pptx / Excel / 图片等格式解析), **支持更多云端图片存储方案** (S3 / R2 / MinIO 等), **支持 OCR 图片识别** 👉 详情参见项目 [CoAI.Dev Blob Service](https://github.com/coaidev/blob-service) (支持 Vercel / Docker 一键部署)
     10. 🌏 **全模型联网搜索**: 基于 [SearXNG](https://github.com/searxng/searxng) 开源引擎, 支持 Google / Bing / DuckDuckGo / Yahoo / WikiPedia / Arxiv / Qwant 等丰富搜索引擎搜索, 支持安全搜索模式, 内容截断, 图片代理, 测试搜索可用性等功能。
     11. 💕 **渐进式 Web 应用 (PWA)**: 支持 PWA 应用 & 支持桌面端 (桌面端基于 [Tauri](https://github.com/tauri-apps/tauri))
     12. 🤩 **齐全后台管理**: 支持美观丰富的仪表盘, 公告 & 通知管理, 用户管理, 订阅管理, 礼品码 & 兑换码管理, 价格设定, 订阅设定, 自定义模型市场, 自定义站点名称 & Logo, SMTP 发件设置等功能
@@ -76,7 +76,7 @@ spec:
     1. 填入你想要绑定的域名，并点击部署。
     2. 部署成功后，默认管理用户名为 `root`，管理密码为 `chatnio123456`，请根据提示尽快更换初始密码。
 
-    更多更新功能和部署手册请查看 👉 [Chat Nio (Github)](https://github.com/Deeptrain-Community/chatnio)
+    更多更新功能和部署手册请查看 👉 [CoAI.Dev (Github)](https://github.com/coaidev/coai)
   services:
     - name: Redis
       icon: https://raw.githubusercontent.com/zeabur/service-icons/main/marketplace/redis.svg
@@ -210,7 +210,7 @@ spec:
               
               !includedir /etc/mysql/conf.d/
     - name: ChatNio
-      icon: https://chatnio.com/logo.png
+      icon: https://coai.dev/logo.png
       template: PREBUILT
       spec:
         source:
@@ -236,24 +236,24 @@ localization:
         name: 域名
         description: 你想将 ChatNio 绑定在哪个域名上？
     readme: |-
-      # [🥳 Chat Nio](https://chatnio.com)
+      # [🥳 CoAI.Dev](https://coai.dev)
 
       #### 🚀 下一代 AIGC 一站式商业解决方案
-      #### *“ Chat Nio > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api) ”*
+      #### *“ CoAI.Dev > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api) ”*
 
 
-      [English](./README.md) · 简体中文 · [官网](https://chatnio.com) · [Discord](https://discord.gg/rpzNSmqaF2) · [部署文档](https://chatnio.com/docs/deploy)
+      [English](./README.md) · 简体中文 · [官网](https://coai.dev) · [Discord](https://discord.gg/rpzNSmqaF2) · [部署文档](https://coai.dev/docs/deploy)
 
       ## 📝 功能
       1. 🤖️ **丰富模型支持**: 多模型服务商支持 (OpenAI / Anthropic / Gemini / Midjourney 等十余种格式兼容 & 私有化 LLM 支持)
       2. 🤯 **美观 UI 设计**: UI 兼容 PC / Pad / 移动三端，遵循 [Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) 设计规范，丰富美观的界面设计和后台仪表盘
       3. 🎃 **完整 Markdown 支持**: 支持 **LaTeX 公式** / **Mermaid 思维导图** / 表格渲染 / 代码高亮 / 图表绘制 / 进度条等进阶 Markdown 语法支持
-      4. 👀 **多主题支持**: 支持多种主题切换，包含亮色主题的**明亮模式**和暗色主题的**深色模式**。 👉 [自定义配色](https://github.com/Deeptrain-Community/chatnio/blob/main/app/src/assets/globals.less)
-      5. 📚 **国际化支持**: 支持国际化，支持多语言切换 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 欢迎贡献翻译 [Pull Request](https://github.com/Deeptrain-Community/chatnio/pulls) 
+      4. 👀 **多主题支持**: 支持多种主题切换，包含亮色主题的**明亮模式**和暗色主题的**深色模式**。 👉 [自定义配色](https://github.com/coaidev/coai/blob/main/app/src/assets/globals.less)
+      5. 📚 **国际化支持**: 支持国际化，支持多语言切换 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 欢迎贡献翻译 [Pull Request](https://github.com/coaidev/coai/pulls) 
       6. 🎨 **文生图支持**: 支持多种文生图模型: **OpenAI DALL-E**✅ & **Midjourney** (支持 **U/V/R** 操作)✅ & Stable Diffusion✅ 等
       7. 📡 **强大对话同步**: **用户 0 成本对话跨端同步支持**，支持**对话分享** (支持链接分享 & 保存为图片 & 分享管理), **无需 WebDav / WebRTC 等依赖和复杂学习成本**
       8. 🎈 **模型市场 & 预设系统**: 支持后台可自定义的模型市场, 可提供模型介绍、标签等参数, 站长可根据情况自定义模型简介。同时支持预设系统，包含 **自定义预设** 和 **云端同步** 功能。
-      9. 📖 **丰富文件解析**: **开箱即用**, 支持**所有模型**的文件解析 (PDF / Docx / Pptx / Excel / 图片等格式解析), **支持更多云端图片存储方案** (S3 / R2 / MinIO 等), **支持 OCR 图片识别** 👉 详情参见项目 [Chat Nio Blob Service](https://github.com/Deeptrain-Community/chatnio-blob-service) (支持 Vercel / Docker 一键部署)
+      9. 📖 **丰富文件解析**: **开箱即用**, 支持**所有模型**的文件解析 (PDF / Docx / Pptx / Excel / 图片等格式解析), **支持更多云端图片存储方案** (S3 / R2 / MinIO 等), **支持 OCR 图片识别** 👉 详情参见项目 [CoAI.Dev Blob Service](https://github.com/coaidev/blob-service) (支持 Vercel / Docker 一键部署)
       10. 🌏 **全模型联网搜索**: 基于 [SearXNG](https://github.com/searxng/searxng) 开源引擎, 支持 Google / Bing / DuckDuckGo / Yahoo / WikiPedia / Arxiv / Qwant 等丰富搜索引擎搜索, 支持安全搜索模式, 内容截断, 图片代理, 测试搜索可用性等功能。
       11. 💕 **渐进式 Web 应用 (PWA)**: 支持 PWA 应用 & 支持桌面端 (桌面端基于 [Tauri](https://github.com/tauri-apps/tauri))
       12. 🤩 **齐全后台管理**: 支持美观丰富的仪表盘, 公告 & 通知管理, 用户管理, 订阅管理, 礼品码 & 兑换码管理, 价格设定, 订阅设定, 自定义模型市场, 自定义站点名称 & Logo, SMTP 发件设置等功能
@@ -295,4 +295,4 @@ localization:
       1. 填入你想要绑定的域名，并点击部署。
       2. 部署成功后，默认管理用户名为 `root`，管理密码为 `chatnio123456`，请根据提示尽快更换初始密码。
 
-      更多更新功能和部署手册请查看 👉 [Chat Nio (Github)](https://github.com/Deeptrain-Community/chatnio)
+      更多更新功能和部署手册请查看 👉 [CoAI.Dev (Github)](https://github.com/coaidev/coai)

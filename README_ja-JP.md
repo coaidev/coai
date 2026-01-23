@@ -2,20 +2,18 @@
 
 ![chatnio](/app/public/logo.png)
 
-# [🥳 Chat Nio](https://chatnio.com)
+# [🥳 CoAI.Dev](https://coai.dev)
 
 #### 🚀 次世代AIGCワンストップビジネスソリューション
 
-#### *"Chat Nio > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api)"*
+#### *"CoAI.Dev > [Next Web](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) + [One API](https://github.com/songquanpeng/one-api)"*
 
 
-English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) · [ドキュメント](https://chatnio.com) · [Discord](https://discord.gg/rpzNSmqaF2) · [デプロイガイド](https://chatnio.com/docs/deploy)
+English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) · [ドキュメント](https://coai.dev) · [Discord](https://discord.gg/rpzNSmqaF2) · [デプロイガイド](https://coai.dev/docs/deploy)
 
-[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/M86XJI)
+[![CoAI.Dev: #1 Repo Of The Day](https://trendshift.io/api/badge/repositories/6369)](https://trendshift.io/repositories/6369)
 
-[![Chat Nio: #1 Repo Of The Day](https://trendshift.io/api/badge/repositories/6369)](https://trendshift.io/repositories/6369)
-
-<img alt="Chat Nio Preview" src="./screenshot/chatnio.png" width="100%" style="border-radius: 8px">
+<img alt="CoAI.Dev Preview" src="./screenshot/coai.png" width="100%" style="border-radius: 8px">
 
 </div>
 
@@ -23,12 +21,12 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 1. 🤖️ **豊富なモデルサポート**: 複数のモデルサービスプロバイダーのサポート (OpenAI / Anthropic / Gemini / Midjourney など十数種類の互換フォーマット & プライベートLLMサポート)
 2. 🤯 **美しいUIデザイン**: PC / Pad / モバイルに対応したUI、[Shadcn UI](https://ui.shadcn.com) & [Tremor Charts](https://blocks.tremor.so) のデザイン基準に従った豊富で美しいインターフェースデザインとバックエンドダッシュボード
 3. 🎃 **完全なMarkdownサポート**: **LaTeX数式** / **Mermaidマインドマップ** / テーブルレンダリング / コードハイライト / チャート描画 / プログレスバーなどの高度なMarkdown構文サポート
-4. 👀 **マルチテーマサポート**: 複数のテーマ切り替えをサポート、ライトテーマの**ライトモード**とダークテーマの**ダークモード**を含む。 👉 [カスタムカラースキーム](https://github.com/Deeptrain-Community/chatnio/blob/main/app/src/assets/globals.less)
-5. 📚 **国際化サポート**: 国際化をサポートし、複数の言語切り替えをサポート 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 翻訳の貢献を歓迎します [Pull Request](https://github.com/Deeptrain-Community/chatnio/pulls)
+4. 👀 **マルチテーマサポート**: 複数のテーマ切り替えをサポート、ライトテーマの**ライトモード**とダークテーマの**ダークモード**を含む。 👉 [カスタムカラースキーム](https://github.com/coaidev/coai/blob/main/app/src/assets/globals.less)
+5. 📚 **国際化サポート**: 国際化をサポートし、複数の言語切り替えをサポート 🇨🇳 🇺🇸 🇯🇵 🇷🇺 👉 翻訳の貢献を歓迎します [Pull Request](https://github.com/coaidev/coai/pulls)
 6. 🎨 **テキストから画像へのサポート**: 複数のテキストから画像へのモデルをサポート: **OpenAI DALL-E**✅ & **Midjourney** ( **U/V/R** 操作をサポート)✅ & Stable Diffusion✅ など
 7. 📡 **強力な会話同期**: **ユーザーのゼロコストクロスデバイス会話同期サポート**、**会話共有** (リンク共有 & 画像として保存 & 共有管理) をサポート、**WebDav / WebRTCなどの依存関係や複雑な学習コストは不要**
 8. 🎈 **モデル市場 & プリセットシステム**: バックエンドでカスタマイズ可能なモデル市場をサポートし、モデルの紹介、タグなどのパラメータを提供。サイトオーナーは状況に応じてモデルの紹介をカスタマイズできます。また、**カスタムプリセット**と**クラウド同期**機能を含むプリセットシステムもサポート。
-9. 📖 **豊富なファイル解析**: **すぐに使える**、**すべてのモデル**のファイル解析をサポート (PDF / Docx / Pptx / Excel / 画像形式の解析)、**より多くのクラウド画像ストレージソリューション** (S3 / R2 / MinIO など) をサポート、**OCR画像認識**をサポート 👉 詳細はプロジェクト [Chat Nio Blob Service](https://github.com/Deeptrain-Community/chatnio-blob-service) を参照 (Vercel / Dockerのワンクリックデプロイをサポート)
+9. 📖 **豊富なファイル解析**: **すぐに使える**、**すべてのモデル**のファイル解析をサポート (PDF / Docx / Pptx / Excel / 画像形式の解析)、**より多くのクラウド画像ストレージソリューション** (S3 / R2 / MinIO など) をサポート、**OCR画像認識**をサポート 👉 詳細はプロジェクト [CoAI.Dev Blob Service](https://github.com/coaidev/blob-service) を参照 (Vercel / Dockerのワンクリックデプロイをサポート)
 10. 🌏 **全モデルインターネット検索**: [SearXNG](https://github.com/searxng/searxng) オープンソースエンジンに基づき、Google / Bing / DuckDuckGo / Yahoo / Wikipedia / Arxiv / Qwant などの豊富な検索エンジン検索をサポート、安全検索モード、コンテンツ切り捨て、画像プロキシ、検索可用性テストなどの機能をサポート。
 11. 💕 **プログレッシブウェブアプリ (PWA)**: PWAアプリケーションをサポートし、デスクトップサポート (デスクトップは [Tauri](https://github.com/tauri-apps/tauri) に基づく)
 12. 🤩 **包括的なバックエンド管理**: 美しく豊富なダッシュボード、公告 & 通知管理、ユーザー管理、サブスクリプション管理、ギフトコード & 交換コード管理、価格設定、サブスクリプション設定、カスタムモデル市場、カスタムサイト名 & ロゴ、SMTPメール設定などの機能をサポート
@@ -42,9 +40,9 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 20. 🎫 **複数の交換コードシステム**: 複数の交換コードシステムをサポートし、ギフトコードと交換コードをサポートし、バッチ生成をサポート。ギフトコードはプロモーション配布に適しており、交換コードはカード販売に適しています。ギフトコードの1つのタイプの複数のコードは、1人のユーザーが1つのコードしか交換できないため、プロモーション中に1人のユーザーが複数回交換する状況をある程度減らします😀
 21. 🥰 **ビジネスフレンドリーなライセンス**: **Apache-2.0** オープンソースライセンスを採用し、商用の二次開発 & 配布にフレンドリー (Apache-2.0ライセンスの規定を遵守し、違法な目的で使用しないでください)
 
-> ### ✨ Chat Nio ビジネス版
+> ### ✨ CoAI.Dev ビジネス版
 >
-> ![Pro Version Preview](./screenshot/chatnio-pro.png)
+> ![Pro Version Preview](./screenshot/coai-pro.png)
 >
 > - ✅ 美しい商用グレードのUI、エレガントなフロントエンドインターフェースとバックエンド管理
 > - ✅ TTS & STT、プラグインマーケットプレイス、RAGナレッジベースなどの豊富な機能とモジュールをサポート
@@ -57,7 +55,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > - ✅ Discord/Telegram/Feishuなどのボット統合機能をサポート (拡張モジュール)
 > - ...
 >
-> [👉 詳細はこちら](https://www.chatnio.com/docs/contact)
+> [👉 詳細はこちら](https://www.coai.dev/docs/contact)
 
 
 ## 🔨 サポートされているモデル
@@ -101,7 +99,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > 実行が成功した後、ホストマシンのマッピングアドレスは `http://localhost:8000` です
 
 ```shell
-git clone --depth=1 --branch=main --single-branch https://github.com/Deeptrain-Community/chatnio.git
+git clone --depth=1 --branch=main --single-branch https://github.com/coaidev/coai.git
 cd chatnio
 docker-compose up -d # サービスを実行
 # 安定版を使用するには、docker-compose -f docker-compose.stable.yaml up -d を使用してください
@@ -165,7 +163,7 @@ docker pull programzmh/chatnio:latest
 > 設定項目 (~/config/**config.yaml**) は環境変数を使用して上書きできます。例えば、`MYSQL_HOST` 環境変数は `mysql.host` 設定項目を上書きできます
 
 ```shell
-git clone https://github.com/Deeptrain-Community/chatnio.git
+git clone https://github.com/coaidev/coai.git
 cd chatnio
 
 cd app
@@ -206,7 +204,7 @@ nohup ./chatnio > output.log & # バックグラウンドで実行するため�
 したがって、これら2つのタイプのプロジェクトの利点を組み合わせて、強力なAPI分散システムと豊富なユーザーインターフェースデザインを持つプロジェクトを作成し、
 Cエンドユーザーのニーズを満たしながらBエンドビジネスを開発し、ユーザーエクスペリエンスを向上させ、ユーザーの学習コストを削減し、ユーザーの粘着性を高めることを目指しています。
 
-そのため、**Chat Nio** が誕生しました。強力なAPI分散システムと豊富なユーザーインターフェースデザインを持つプロジェクトを作成し、次世代のオープンソースAIGCプロジェクトのワンストップ商用ソリューションになることを目指しています。
+そのため、**CoAI.Dev** が誕生しました。強力なAPI分散システムと豊富なユーザーインターフェースデザインを持つプロジェクトを作成し、次世代のオープンソースAIGCプロジェクトのワンストップ商用ソリューションになることを目指しています。
 
 
 ## ❤ 寄付
