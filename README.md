@@ -75,6 +75,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 14. OpenRouter (👉 OpenAI)
 15. 360 GPT
 16. LocalAI / Ollama (👉 OpenAI)
+17. Novita AI (👉 OpenAI)
 
 ## 👻 OpenAI Compatible API Proxy
    - [x] Chat Completions _(/v1/chat/completions)_
