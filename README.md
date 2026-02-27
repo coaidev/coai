@@ -89,6 +89,7 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 
 ### ✨ Zeabur (One-Click)
 [![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/M86XJI)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcoaidev%2Fcoai.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcoaidev%2Fcoai?ref=badge_shield)
 
 > Zeabur provides a certain free quota, you can use non-paid regions for one-click deployment, and also supports plan subscriptions and elastic billing for flexible expansion.
 > 1. Click `Deploy` to deploy, and enter the domain name you wish to bind, wait for the deployment to complete.
@@ -230,3 +231,7 @@ Thus, **CoAI.Dev** was born. We hope to create a project that has both a powerfu
 ## ❤ Donations
 
 If you find this project helpful, you can give it a Star to show your support!
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fcoaidev%2Fcoai.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fcoaidev%2Fcoai?ref=badge_large)
