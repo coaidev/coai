@@ -30,3 +30,14 @@ system:
   search:
     endpoint: https://duckduckgo-api.vercel.app
     query: 5
+
+# PayTheFly Crypto Payment Gateway
+# Supports BSC (chainId=56) and TRON (chainId=728126428)
+# Get credentials at https://pro.paythefly.com
+paythefly:
+  enabled: false
+  project_id: ""
+  project_key: ""       # For webhook HMAC-SHA256 verification
+  private_key: ""       # For EIP-712 signature generation (keep secret!)
+  chain_id: 56          # 56=BSC (18 decimals), 728126428=TRON (6 decimals)
+  token_address: ""     # Payment token contract address
