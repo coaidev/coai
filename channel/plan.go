@@ -6,10 +6,11 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/go-redis/redis/v8"
-	"github.com/spf13/viper"
 	"strings"
 	"time"
+
+	"github.com/go-redis/redis/v8"
+	"github.com/spf13/viper"
 )
 
 type PlanManager struct {
@@ -49,8 +50,7 @@ func NewPlanManager() *PlanManager {
 }
 
 func (c *PlanManager) SaveConfig() error {
-	viper.Set("subscription", c)
-	return viper.WriteConfig()
+	return utils.SaveConfig("subscription", c)
 }
 
 func (c *PlanManager) UpdateConfig(data *PlanManager) error {

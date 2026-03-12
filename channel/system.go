@@ -130,10 +130,7 @@ func (c *SystemConfig) Load() {
 }
 
 func (c *SystemConfig) SaveConfig() error {
-	viper.Set("system", c)
-	c.Load()
-
-	return viper.WriteConfig()
+	return utils.SaveConfig("system", c)
 }
 
 func (c *SystemConfig) AsInfo() ApiInfo {

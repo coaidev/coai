@@ -3,6 +3,7 @@ package channel
 import (
 	"chat/globals"
 	"chat/utils"
+
 	"github.com/spf13/viper"
 )
 
@@ -79,9 +80,7 @@ func (m *ChargeManager) GetCharge(model string) *Charge {
 }
 
 func (m *ChargeManager) SaveConfig() error {
-	viper.Set("charge", m.Sequence)
-	m.Load()
-	return viper.WriteConfig()
+	return utils.SaveConfig("charge", m.Sequence)
 }
 
 func (m *ChargeManager) GetMaxId() int {

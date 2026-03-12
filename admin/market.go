@@ -2,6 +2,7 @@ package admin
 
 import (
 	"chat/globals"
+	"chat/utils"
 	"fmt"
 
 	"github.com/spf13/viper"
@@ -49,8 +50,7 @@ func (m *Market) GetModel(id string) *MarketModel {
 }
 
 func (m *Market) SaveConfig() error {
-	viper.Set("market", m.Models)
-	return viper.WriteConfig()
+	return utils.SaveConfig("market", m.Models)
 }
 
 func (m *Market) SetModels(models MarketModelList) error {

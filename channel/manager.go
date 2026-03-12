@@ -4,8 +4,9 @@ import (
 	"chat/globals"
 	"chat/utils"
 	"errors"
-	"github.com/spf13/viper"
 	"time"
+
+	"github.com/spf13/viper"
 )
 
 var ConduitInstance *Manager
@@ -141,9 +142,7 @@ func (m *Manager) GetMaxId() int {
 }
 
 func (m *Manager) SaveConfig() error {
-	viper.Set("channel", m.Sequence)
-	m.Load()
-	return viper.WriteConfig()
+	return utils.SaveConfig("channel", m.Sequence)
 }
 
 func (m *Manager) CreateChannel(channel *Channel) error {
