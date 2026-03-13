@@ -219,6 +219,7 @@ func sendStreamTranshipmentResponse(c *gin.Context, form RelayForm, messages []g
 
 	group := auth.GetGroup(db, user)
 	charge := channel.ChargeInstance.GetCharge(form.Model)
+	cCopy := c.Copy()
 
 	go func() {
 		buffer := utils.NewBuffer(form.Model, messages, charge)
@@ -246,7 +247,7 @@ func sendStreamTranshipmentResponse(c *gin.Context, form RelayForm, messages []g
 		partial <- getStreamTranshipmentForm(id, created, form, &globals.Chunk{Content: ""}, buffer, true, nil)
 
 		if !hit {
-			CollectQuota(c, user, buffer, plan, err)
+			CollectQuota(cCopy, user, buffer, plan, err)
 		}
 
 		close(partial)
