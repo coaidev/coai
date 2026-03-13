@@ -10,6 +10,7 @@ type Message struct {
 	ToolCallId       *string       `json:"tool_call_id,omitempty"`      // only `tool` role
 	ToolCalls        *ToolCalls    `json:"tool_calls,omitempty"`        // only `assistant` role
 	ReasoningContent *string       `json:"reasoning_content,omitempty"` // only for deepseek reasoner models
+	MultiModal       *MultiModal   `json:"multi_mod_content,omitempty"` // gemini inline data (e.g., image base64)
 }
 
 type Chunk struct {
@@ -17,6 +18,17 @@ type Chunk struct {
 	ToolCall     *ToolCalls    `json:"tool_call,omitempty"`
 	FunctionCall *FunctionCall `json:"function_call,omitempty"`
 }
+
+type InlineData struct {
+	Data     string `json:"data"`
+	MimeType string `json:"mime_type"`
+}
+
+type MultiModalContent struct {
+	InlineData *InlineData `json:"inline_data,omitempty"`
+}
+
+type MultiModal []MultiModalContent
 
 type ChatSegmentResponse struct {
 	Conversation int64   `json:"conversation"`

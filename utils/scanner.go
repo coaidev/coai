@@ -94,7 +94,10 @@ func EventScanner(props *EventScannerProps, config ...globals.ProxyConfig) *Even
 }
 
 func processFullSSE(body io.ReadCloser, callback func(string) error) *EventScannerError {
+	// allow large SSE lines (e.g., image/base64 payloads)
 	scanner := bufio.NewScanner(body)
+	buf := make([]byte, 0, 1024*1024)
+	scanner.Buffer(buf, 16*1024*1024)
 	var eventType, eventData string
 	var buffer strings.Builder
 
@@ -164,11 +167,18 @@ func processFullSSE(body io.ReadCloser, callback func(string) error) *EventScann
 		}
 	}
 
+	if err := scanner.Err(); err != nil {
+		return &EventScannerError{Error: err}
+	}
+
 	return nil
 }
 
 func processLegacySSE(body io.ReadCloser, callback func(string) error) *EventScannerError {
+	// default scanner buffer (64kb) is not enough for image/base64 chunks
 	scanner := bufio.NewScanner(body)
+	buf := make([]byte, 0, 1024*1024)
+	scanner.Buffer(buf, 16*1024*1024)
 	scanner.Split(func(data []byte, atEOF bool) (advance int, token []byte, err error) {
 		if atEOF && len(data) == 0 {
 			// when EOF and empty data
@@ -217,6 +227,10 @@ func processLegacySSE(body io.ReadCloser, callback func(string) error) *EventSca
 
 			return &EventScannerError{Error: err}
 		}
+	}
+
+	if err := scanner.Err(); err != nil {
+		return &EventScannerError{Error: err}
 	}
 
 	return nil

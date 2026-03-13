@@ -80,8 +80,27 @@ func getChoices(form *ChatStreamResponse) *globals.Chunk {
 
 	choice := form.Choices[0].Delta
 
+	content := choice.Content
+
+	// handle gemini multi-modal inline data (base64 image)
+	if len(content) == 0 && choice.MultiModal != nil {
+		for _, item := range *choice.MultiModal {
+			if item.InlineData == nil || len(item.InlineData.Data) == 0 {
+				continue
+			}
+
+			mime := item.InlineData.MimeType
+			if len(mime) == 0 {
+				mime = "image/png"
+			}
+			// use markdown image to let frontend直接渲染而不是显示base64文本
+			content = fmt.Sprintf("![image](data:%s;base64,%s)", mime, item.InlineData.Data)
+			break
+		}
+	}
+
 	return &globals.Chunk{
-		Content:      choice.Content,
+		Content:      content,
 		ToolCall:     choice.ToolCalls,
 		FunctionCall: choice.FunctionCall,
 	}
@@ -128,7 +147,7 @@ func (c *ChatInstance) ProcessLine(data string, isCompletionType bool) (*globals
 	}
 
 	if form := processChatErrorResponse(data); form != nil {
-		return &globals.Chunk{Content: ""}, errors.New(fmt.Sprintf("openai error: %s (type: %s)", form.Error.Message, form.Error.Type))
+		return &globals.Chunk{Content: ""}, fmt.Errorf("openai error: %s (type: %s)", form.Error.Message, form.Error.Type)
 	}
 
 	globals.Warn(fmt.Sprintf("openai error: cannot parse chat completion response: %s", data))
