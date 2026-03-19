@@ -70,11 +70,12 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 9. Baichuan AI
 10. Moonshot AI (👉 OpenAI)
 11. DeepSeek AI (👉 OpenAI)
-12. ByteDance Skylark *(✅ Function Calling)*
-13. Groq Cloud AI
-14. OpenRouter (👉 OpenAI)
-15. 360 GPT
-16. LocalAI / Ollama (👉 OpenAI)
+12. MiniMax AI (👉 OpenAI)
+13. ByteDance Skylark *(✅ Function Calling)*
+14. Groq Cloud AI
+15. OpenRouter (👉 OpenAI)
+16. 360 GPT
+17. LocalAI / Ollama (👉 OpenAI)
 
 ## 👻 OpenAI Compatible API Proxy
    - [x] Chat Completions _(/v1/chat/completions)_

@@ -68,11 +68,12 @@
 9. 百川大模型 Baichuan AI
 10. 月之暗面 Moonshot AI (👉 OpenAI)
 11. 深度求索 DeepSeek AI (👉 OpenAI)
-12. 字节云雀 ByteDance Skylark *(✅ Function Calling)*
-13. Groq Cloud AI
-14. OpenRouter (👉 OpenAI)
-15. 360 GPT
-16. LocalAI / Ollama (👉 OpenAI)
+12. MiniMax AI (👉 OpenAI)
+13. 字节云雀 ByteDance Skylark *(✅ Function Calling)*
+14. Groq Cloud AI
+15. OpenRouter (👉 OpenAI)
+16. 360 GPT
+17. LocalAI / Ollama (👉 OpenAI)
 
 ## 👻 中转 OpenAI 兼容 API
    - [x] Chat Completions _(/v1/chat/completions)_

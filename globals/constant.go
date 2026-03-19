@@ -26,6 +26,7 @@ const (
 	MoonshotChannelType    = "moonshot"
 	GroqChannelType        = "groq"
 	DeepseekChannelType    = "deepseek"
+	MinimaxChannelType     = "minimax"
 	DifyChannelType        = "dify"
 	CozeChannelType        = "coze"
 )
