@@ -6,6 +6,7 @@ import (
 	"chat/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"path/filepath"
 	"strings"
 )
 
@@ -24,14 +25,24 @@ type WebsocketArticleResponse struct {
 
 func ProjectTarDownloadAPI(c *gin.Context) {
 	hash := strings.TrimSpace(c.Query("hash"))
+	// Prevent path traversal by validating hash contains only safe characters
+	if hash == "" || strings.ContainsAny(hash, "/\..") {
+		c.JSON(400, gin.H{"error": "invalid hash"})
+		return
+	}
 	c.Writer.Header().Add("Content-Disposition", "attachment; filename=article.tar.gz")
-	c.File(fmt.Sprintf("storage/article/%s.tar.gz", hash))
+	c.File(filepath.Join("storage", "article", hash+".tar.gz"))
 }
 
 func ProjectZipDownloadAPI(c *gin.Context) {
 	hash := strings.TrimSpace(c.Query("hash"))
+	// Prevent path traversal by validating hash contains only safe characters
+	if hash == "" || strings.ContainsAny(hash, "/\..") {
+		c.JSON(400, gin.H{"error": "invalid hash"})
+		return
+	}
 	c.Writer.Header().Add("Content-Disposition", "attachment; filename=article.zip")
-	c.File(fmt.Sprintf("storage/article/%s.zip", hash))
+	c.File(filepath.Join("storage", "article", hash+".zip"))
 }
 
 func GenerateAPI(c *gin.Context) {
