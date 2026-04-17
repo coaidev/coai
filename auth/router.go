@@ -19,4 +19,9 @@ func Register(app *gin.RouterGroup) {
 	app.POST("/subscribe", SubscribeAPI)
 	app.GET("/invite", InviteAPI)
 	app.GET("/redeem", RedeemAPI)
+
+	// PayTheFly crypto payment routes
+	app.POST("/paythefly/create", PayTheFlyCreateOrderAPI)
+	app.POST("/paythefly/webhook", PayTheFlyWebhookAPI)
+	app.GET("/paythefly/status", PayTheFlyOrderStatusAPI)
 }
