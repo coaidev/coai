@@ -20,6 +20,11 @@ type createRequest struct {
 	Content string `json:"content"`
 }
 
+type updateRequest struct {
+	ID      int    `json:"id"`
+	Content string `json:"content"`
+}
+
 type createResponse struct {
 	Status bool   `json:"status"`
 	Error  string `json:"error"`

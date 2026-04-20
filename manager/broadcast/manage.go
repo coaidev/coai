@@ -47,3 +47,29 @@ func getBroadcastList(c *gin.Context) ([]Info, error) {
 
 	return broadcastList, nil
 }
+
+func removeBroadcast(c *gin.Context, index int) error {
+	db := utils.GetDBFromContext(c)
+	cache := utils.GetCacheFromContext(c)
+
+	if _, err := globals.ExecDb(db, `DELETE FROM broadcast WHERE id = ?`, index); err != nil {
+		return err
+	}
+
+	cache.Del(context.Background(), ":broadcast")
+
+	return nil
+}
+
+func updateBroadcast(c *gin.Context, index int, content string) error {
+	db := utils.GetDBFromContext(c)
+	cache := utils.GetCacheFromContext(c)
+
+	if _, err := globals.ExecDb(db, `UPDATE broadcast SET content = ? WHERE id = ?`, content, index); err != nil {
+		return err
+	}
+
+	cache.Del(context.Background(), ":broadcast")
+
+	return nil
+}
