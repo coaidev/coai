@@ -49,6 +49,10 @@ func (c *ChatInstance) GetChatBody(props *adaptercommon.ChatProps, stream bool) 
 	// o1, o3, gpt-5 compatibility
 	isNewModel := len(props.Model) >= 2 && (props.Model[:2] == "o1" || props.Model[:2] == "o3") || strings.HasPrefix(props.Model, "gpt-5")
 
+	// XAI grok reasoning models (e.g. grok-3-mini, grok-3-mini-fast) do not support
+	// frequency_penalty or presence_penalty and return HTTP 400 when these are sent.
+	isGrokReasoningModel := strings.HasPrefix(props.Model, "grok-") && strings.Contains(props.Model, "-mini")
+
 	var temperature *float32
 	if isNewModel {
 		temp := float32(1.0)
@@ -57,12 +61,19 @@ func (c *ChatInstance) GetChatBody(props *adaptercommon.ChatProps, stream bool) 
 		temperature = props.Temperature
 	}
 
+	var presencePenalty *float32
+	var frequencyPenalty *float32
+	if !isGrokReasoningModel {
+		presencePenalty = props.PresencePenalty
+		frequencyPenalty = props.FrequencyPenalty
+	}
+
 	request := ChatRequest{
 		Model:            props.Model,
 		Messages:         messages,
 		Stream:           stream,
-		PresencePenalty:  props.PresencePenalty,
-		FrequencyPenalty: props.FrequencyPenalty,
+		PresencePenalty:  presencePenalty,
+		FrequencyPenalty: frequencyPenalty,
 		Temperature:      temperature,
 		TopP:             props.TopP,
 		Tools:            props.Tools,
