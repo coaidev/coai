@@ -41,6 +41,7 @@ var channelFactories = map[string]adaptercommon.FactoryCreator{
 	globals.DeepseekChannelType:    deepseek.NewChatInstanceFromConfig,
 	globals.DifyChannelType:        dify.NewChatInstanceFromConfig,
 	globals.CozeChannelType:        coze.NewChatInstanceFromConfig,
+	globals.BurnCloudChannelType:   openai.NewChatInstanceFromConfig, // openai format
 
 	globals.MoonshotChannelType: openai.NewChatInstanceFromConfig, // openai format
 	globals.GroqChannelType:     openai.NewChatInstanceFromConfig, // openai format

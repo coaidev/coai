@@ -28,6 +28,7 @@ const (
 	DeepseekChannelType    = "deepseek"
 	DifyChannelType        = "dify"
 	CozeChannelType        = "coze"
+	BurnCloudChannelType   = "burncloud"
 )
 
 const (
