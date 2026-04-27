@@ -73,6 +73,7 @@
 14. OpenRouter (👉 OpenAI)
 15. 360 GPT
 16. LocalAI / Ollama (👉 OpenAI)
+17. BurnCloud (👉 OpenAI)
 
 ## 👻 中转 OpenAI 兼容 API
    - [x] Chat Completions _(/v1/chat/completions)_
