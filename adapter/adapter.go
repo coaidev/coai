@@ -14,6 +14,7 @@ import (
 	"chat/adapter/midjourney"
 	"chat/adapter/openai"
 	"chat/adapter/palm2"
+	"chat/adapter/qiniu"
 	"chat/adapter/skylark"
 	"chat/adapter/slack"
 	"chat/adapter/sparkdesk"
@@ -41,6 +42,7 @@ var channelFactories = map[string]adaptercommon.FactoryCreator{
 	globals.DeepseekChannelType:    deepseek.NewChatInstanceFromConfig,
 	globals.DifyChannelType:        dify.NewChatInstanceFromConfig,
 	globals.CozeChannelType:        coze.NewChatInstanceFromConfig,
+	globals.QiniuChannelType:       qiniu.NewChatInstanceFromConfig,
 
 	globals.MoonshotChannelType: openai.NewChatInstanceFromConfig, // openai format
 	globals.GroqChannelType:     openai.NewChatInstanceFromConfig, // openai format

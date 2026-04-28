@@ -35,7 +35,8 @@ import {
   IconAvatarProps,
   Azure,
   Coze,
-  Dify
+  Dify,
+  Qiniu
 } from "@lobehub/icons";
 import React from "react";
 import { cn } from "@/components/ui/lib/utils.ts";
@@ -120,6 +121,8 @@ const builtinAvatars: Record<string, React.ExoticComponent<IconAvatarProps>> = {
   firework: Fireworks.Avatar,
 
   groq: Groq.Avatar,
+
+  qiniu: Qiniu.Avatar,
 
   router: OpenRouter.Avatar,
 
