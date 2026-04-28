@@ -73,10 +73,11 @@ export const modelColorMapper: Record<string, string> = {
   // Baichuan AI
   baichuan: "orange-700",
 
-  // ByteDance Skylark / Doubao / Coze
+  // ByteDance Skylark / Doubao / Coze / Qiniu channel
   skylark: "sky-300",
   doubao: "sky-300",
   coze: "sky-300",
+  qiniu: "cyan-600",
 
   // Dify
   dify: "gray-300",

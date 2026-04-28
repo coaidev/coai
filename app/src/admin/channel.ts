@@ -71,6 +71,7 @@ export const ChannelTypes: Record<string, string> = {
   deepseek: "深度求索 DeepSeek",
   coze: "扣子 Coze",
   dify: "Dify",
+  qiniu: "七牛云 Qiniu",
 };
 
 export const ShortChannelTypes: Record<string, string> = {
@@ -93,6 +94,7 @@ export const ShortChannelTypes: Record<string, string> = {
   deepseek: "DeepSeek",
   coze: "Coze",
   dify: "Dify",
+  qiniu: "七牛云",
 };
 
 export const ChannelInfos: Record<string, ChannelInfo> = {
@@ -313,6 +315,15 @@ export const ChannelInfos: Record<string, ChannelInfo> = {
       "> 由于 Dify 平台一个 Key 对应一个 CHATFLOW （模型），所以模型名称仅在用户调用本系统时用于标识用户调用的对象，不代表调用 Dify 平台 CHATFLOW 时被调用 CHATFLOW 的名称 \n" +
       "> 因此，您需要为每一个 Dify 平台的 CHATFLOW 分别创建渠道 \n" +
       "> 如果需要让系统自动适配 Dify 平台的图标，请将模型名称填写为 **dify** 开头的模型，如 **dify-chat** \n",
+  },
+  qiniu: {
+    endpoint: "https://api.qnaigc.com",
+    format: "<api-key>",
+    models: ["deepseek-v3"],
+    description:
+      "> 兼容 OpenAI Chat Completions；密钥为控制台 **API Key**（`Authorization: Bearer ...`）。\n" +
+      "> 接入点默认 **https://api.qnaigc.com**（无需填写 `/v1`，系统将请求 `/v1/chat/completions`）。\n" +
+      "> 可用模型以控制台为准；同步模型列表时使用上方接入点调用 `/v1/models`。\n",
   },
 };
 

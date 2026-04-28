@@ -7,6 +7,12 @@ import (
 	"net/http"
 )
 
+func reloadChannelsOnSuccess(err error) {
+	if err == nil {
+		ConduitInstance.Load()
+	}
+}
+
 type SyncChargeForm struct {
 	Overwrite bool           `json:"overwrite"`
 	Data      ChargeSequence `json:"data"`
@@ -25,6 +31,7 @@ func AttachmentService(c *gin.Context) {
 func DeleteChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.DeleteChannel(utils.ParseInt(id))
+	reloadChannelsOnSuccess(state)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -35,6 +42,7 @@ func DeleteChannel(c *gin.Context) {
 func ActivateChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.ActivateChannel(utils.ParseInt(id))
+	reloadChannelsOnSuccess(state)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -45,6 +53,7 @@ func ActivateChannel(c *gin.Context) {
 func DeactivateChannel(c *gin.Context) {
 	id := c.Param("id")
 	state := ConduitInstance.DeactivateChannel(utils.ParseInt(id))
+	reloadChannelsOnSuccess(state)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
@@ -80,6 +89,7 @@ func CreateChannel(c *gin.Context) {
 	}
 
 	state := ConduitInstance.CreateChannel(&channel)
+	reloadChannelsOnSuccess(state)
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
 		"error":  utils.GetError(state),
@@ -100,6 +110,7 @@ func UpdateChannel(c *gin.Context) {
 	channel.Id = utils.ParseInt(id)
 
 	state := ConduitInstance.UpdateChannel(channel.Id, &channel)
+	reloadChannelsOnSuccess(state)
 	c.JSON(http.StatusOK, gin.H{
 		"status": state == nil,
 		"error":  utils.GetError(state),
