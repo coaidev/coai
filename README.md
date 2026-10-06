@@ -114,6 +114,14 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 6. For more operation details and payment information, see：[Service Details](https://computenest.console.aliyun.com/service/detail/ap-southeast-1/service-27e11d3a5c9b40628505/1?type=user&isRecommend=true).
 
 
+### 🚀 ZopDay (One-Click)
+[![Deploy on ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=programzmh/chatnio:latest&port=8094&name=coai)
+
+> ZopDay runs the published image on its managed ZopCloud, or deploys it into your own AWS or GCP account.
+> 1. Click `Deploy`, choose ZopCloud or a connected AWS / GCP account, then create a MySQL and a Redis in ZopDay for the instance to use.
+> 2. Fill in `MYSQL_HOST`, `MYSQL_PORT`, `MYSQL_DB`, `MYSQL_USER`, `MYSQL_PASSWORD`, `REDIS_HOST`, `REDIS_PORT`, `SECRET` and `SERVE_STATIC=true` in the environment variables, as in the Docker installation below.
+> 3. After deployment is complete, visit the address ZopDay assigns and log in to the backend management using the username `root` and password `chatnio123456`. Please change the password in the CoAI backend in a timely manner.
+
 ### ⚡ Docker Compose Installation (Recommended)
 > [!NOTE]
 > After successful execution, the host machine mapping address is `http://localhost:8000`

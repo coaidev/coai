@@ -94,6 +94,14 @@ English · [简体中文](./README_zh-CN.md) · [日本語](./README_ja-JP.md) �
 > 1. `Deploy` をクリックしてデプロイし、バインドしたいドメイン名を入力し、デプロイが完了するのを待ちます。
 > 2. デプロイが完了したら、ドメイン名にアクセスし、ユーザー名 `root` とパスワード `chatnio123456` を使用してバックエンド管理にログインします。チャットニオのバックエンドでパスワードを変更するように指示に従ってください。
 
+### 🚀 ZopDay (ワンクリック)
+[![Deploy on ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=programzmh/chatnio:latest&port=8094&name=coai)
+
+> ZopDay は公開されているイメージをマネージドの ZopCloud で実行できるほか、ご自身の AWS または GCP アカウントにデプロイすることもできます。
+> 1. `Deploy` をクリックしてデプロイし、ZopCloud または接続済みの AWS / GCP アカウントを選択して、インスタンスが使用する MySQL と Redis を ZopDay 上に作成します。
+> 2. 環境変数に `MYSQL_HOST`、`MYSQL_PORT`、`MYSQL_DB`、`MYSQL_USER`、`MYSQL_PASSWORD`、`REDIS_HOST`、`REDIS_PORT`、`SECRET`、`SERVE_STATIC=true` を、下記の Docker インストールと同様に入力します。
+> 3. デプロイが完了したら、ZopDay が割り当てたアドレスにアクセスし、ユーザー名 `root` とパスワード `chatnio123456` を使用してバックエンド管理にログインします。CoAI のバックエンドでパスワードを速やかに変更してください。
+
 ### ⚡ Docker Composeインストール (推奨)
 > [!NOTE]
 > 実行が成功した後、ホストマシンのマッピングアドレスは `http://localhost:8000` です

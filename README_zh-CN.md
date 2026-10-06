@@ -111,6 +111,14 @@
 5. 点击详情界面**立即使用**中的链接，可进入CoAI社区版界面。默认用户名为`root`，密码`为chatnio123456` 登录后台管理。
 6. 更多操作详情与付费信息，参见：[服务详情](https://computenest.console.aliyun.com/service/detail/cn-hangzhou/service-bfbf676bd89d434691fc/1?type=user&isRecommend=true)
 
+### 🚀 ZopDay (一键部署)
+[![Deploy on ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=programzmh/chatnio:latest&port=8094&name=coai)
+
+> ZopDay 可以使用托管的 ZopCloud 运行已发布的镜像，也可以部署到你自己的 AWS 或 GCP 账号中。
+> 1. 点击 `Deploy` 进行部署，选择 ZopCloud 或已连接的 AWS / GCP 账号，并在 ZopDay 中创建实例所需的 MySQL 和 Redis。
+> 2. 在环境变量中填写 `MYSQL_HOST`、`MYSQL_PORT`、`MYSQL_DB`、`MYSQL_USER`、`MYSQL_PASSWORD`、`REDIS_HOST`、`REDIS_PORT`、`SECRET` 和 `SERVE_STATIC=true`，与下方 Docker 安装一致。
+> 3. 部署完成后，请访问 ZopDay 分配的地址，并使用用户名 `root` 密码 `chatnio123456` 登录后台管理，请按照提示在 CoAI 后台及时修改密码。
+
 ### ⚡ Docker Compose 安装 (推荐)
 > [!NOTE]
 > 运行成功后, 宿主机映射地址为 `http://localhost:8000`
