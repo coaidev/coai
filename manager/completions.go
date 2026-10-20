@@ -24,7 +24,7 @@ func NativeChatHandler(c *gin.Context, user *auth.User, model string, message []
 		}
 	}()
 
-	segment := web.ToSearched(enableWeb, message)
+	segment := web.ToSearchedContext(c.Request.Context(), enableWeb, message)
 
 	db := utils.GetDBFromContext(c)
 	cache := utils.GetCacheFromContext(c)

@@ -28,6 +28,7 @@ var CloseRegistration bool
 var CloseRelay bool
 
 var SearchEndpoint string
+var SearchProvider string
 var SearchCrop bool
 var SearchCropLength int
 var SearchEngines string    // e.g. "google,bing"

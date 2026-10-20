@@ -43,6 +43,7 @@ export type MailState = {
 };
 
 export type SearchState = {
+  provider?: string;
   endpoint: string;
   crop: boolean;
   crop_len: number;
@@ -216,6 +217,7 @@ export const initialSystemState: SystemProps = {
     },
   },
   search: {
+    provider: "auto",
     endpoint: "",
     crop: false,
     crop_len: 1000,

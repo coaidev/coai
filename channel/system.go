@@ -4,6 +4,7 @@ import (
 	"chat/globals"
 	"chat/utils"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/spf13/viper"
@@ -64,6 +65,7 @@ type mailState struct {
 }
 
 type SearchState struct {
+	Provider   string   `json:"provider" mapstructure:"provider"`
 	Endpoint   string   `json:"endpoint" mapstructure:"endpoint"`
 	Crop       bool     `json:"crop" mapstructure:"crop"`
 	CropLen    int      `json:"crop_len" mapstructure:"croplen"`
@@ -95,6 +97,8 @@ func NewSystemConfig() *SystemConfig {
 	if err := viper.UnmarshalKey("system", conf); err != nil {
 		panic(err)
 	}
+	// AutomaticEnv must also work for saved configs predating this field.
+	conf.Search.Provider = viper.GetString("system.search.provider")
 
 	conf.Load()
 	return conf
@@ -121,12 +125,19 @@ func (c *SystemConfig) Load() {
 		c.General.PWAManifest = utils.ReadPWAManifest()
 	}
 
-	globals.SearchEndpoint = c.Search.Endpoint
-	globals.SearchCrop = c.Search.Crop
-	globals.SearchCropLength = c.GetSearchCropLength()
-	globals.SearchEngines = c.GetSearchEngines()
-	globals.SearchImageProxy = c.GetImageProxy()
-	globals.SearchSafeSearch = c.Search.SafeSearch
+	c.loadSearchSettings()
+}
+
+func (c *SystemConfig) loadSearchSettings() {
+	provider := c.Search.Provider
+	if override := os.Getenv("SYSTEM_SEARCH_PROVIDER"); override != "" {
+		provider = override
+	}
+	globals.SetSearchSettings(globals.SearchSettings{
+		Provider: provider, Endpoint: c.Search.Endpoint, Crop: c.Search.Crop,
+		CropLength: c.GetSearchCropLength(), Engines: c.GetSearchEngines(),
+		ImageProxy: c.GetImageProxy(), SafeSearch: c.Search.SafeSearch,
+	})
 }
 
 func (c *SystemConfig) SaveConfig() error {
@@ -161,7 +172,11 @@ func (c *SystemConfig) UpdateConfig(data *SystemConfig) error {
 	utils.ApplySeo(c.General.Title, c.General.Logo)
 	utils.ApplyPWAManifest(c.General.PWAManifest)
 
-	return c.SaveConfig()
+	if err := c.SaveConfig(); err != nil {
+		return err
+	}
+	c.loadSearchSettings()
+	return nil
 }
 
 func (c *SystemConfig) GetInitialQuota() float64 {

@@ -28,5 +28,7 @@ system:
     password: ""
     from: ""
   search:
-    endpoint: https://duckduckgo-api.vercel.app
+    # auto preserves a configured SearXNG endpoint; otherwise uses Parallel MCP.
+    provider: auto
+    endpoint: ""
     query: 5

@@ -848,6 +848,27 @@ function Search({ data, dispatch, onChange }: CompProps<SearchState>) {
         {t("admin.system.searchTip")}
       </ParagraphDescription>
       <ParagraphItem>
+        <Label>{t("admin.system.searchProvider")}</Label>
+        <Select
+          value={data.provider || "auto"}
+          onValueChange={(value) =>
+            dispatch({ type: "update:search.provider", value })
+          }
+        >
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="auto">{t("admin.system.searchAutomatic")}</SelectItem>
+            <SelectItem value="parallel">Parallel Search MCP</SelectItem>
+            <SelectItem value="searxng">SearXNG</SelectItem>
+          </SelectContent>
+        </Select>
+      </ParagraphItem>
+      <ParagraphDescription border>
+        {t("admin.system.searchProviderTip")}
+      </ParagraphDescription>
+      <ParagraphItem>
         <Label>{t("admin.system.searchEndpoint")}</Label>
         <Input
           value={data.endpoint}
@@ -990,7 +1011,7 @@ function Search({ data, dispatch, onChange }: CompProps<SearchState>) {
                     <Loader2 className={`h-4 w-4 animate-spin`} />
                   ) : (
                     <>
-                      <p className={`text-sm mb-1`}>SearXNG Result</p>
+                      <p className={`text-sm mb-1`}>{t("admin.system.searchResult")}</p>
                       <Textarea value={searchResult} rows={5} readOnly />
                     </>
                   )}

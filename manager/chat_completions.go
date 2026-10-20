@@ -72,7 +72,7 @@ func ChatRelayAPI(c *gin.Context) {
 		suffix := strings.TrimPrefix(form.Model, "web-")
 
 		form.Model = suffix
-		messages = web.ToSearched(true, messages)
+		messages = web.ToSearchedContext(c.Request.Context(), true, messages)
 	}
 
 	if strings.HasSuffix(form.Model, "-official") {

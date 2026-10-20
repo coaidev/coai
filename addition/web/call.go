@@ -4,14 +4,21 @@ import (
 	"chat/globals"
 	"chat/manager/conversation"
 	"chat/utils"
+	"context"
 	"fmt"
 	"time"
 )
 
 type Hook func(message []globals.Message, token int) (string, error)
 
-func toWebSearchingMessage(message []globals.Message) []globals.Message {
-	data, _ := GenerateSearchResult(message[len(message)-1].Content)
+func toWebSearchingMessage(ctx context.Context, message []globals.Message) []globals.Message {
+	if len(message) == 0 {
+		return message
+	}
+	data, err := GenerateSearchResultContext(ctx, message[len(message)-1].Content)
+	if err != nil {
+		return message
+	}
 
 	return utils.Insert(message, 0, globals.Message{
 		Role: globals.System,
@@ -23,18 +30,26 @@ func toWebSearchingMessage(message []globals.Message) []globals.Message {
 }
 
 func ToChatSearched(instance *conversation.Conversation, restart bool) []globals.Message {
+	return ToChatSearchedContext(context.Background(), instance, restart)
+}
+
+func ToChatSearchedContext(ctx context.Context, instance *conversation.Conversation, restart bool) []globals.Message {
 	segment := conversation.CopyMessage(instance.GetChatMessage(restart))
 
 	if instance.IsEnableWeb() {
-		segment = toWebSearchingMessage(segment)
+		segment = toWebSearchingMessage(ctx, segment)
 	}
 
 	return segment
 }
 
 func ToSearched(enable bool, message []globals.Message) []globals.Message {
+	return ToSearchedContext(context.Background(), enable, message)
+}
+
+func ToSearchedContext(ctx context.Context, enable bool, message []globals.Message) []globals.Message {
 	if enable {
-		return toWebSearchingMessage(message)
+		return toWebSearchingMessage(ctx, message)
 	}
 
 	return message
